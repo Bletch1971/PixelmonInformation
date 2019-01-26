@@ -1,0 +1,11 @@
+{
+  "homepage": "https://github.com/Bletch1971/PixelmonExtension",
+  "promos": {
+    "1.12-latest": "0.1.1",
+    "1.12.1-latest": "0.1.1",
+    "1.12.2-latest": "0.1.1",
+    "1.12-recommended": "0.1.1",
+    "1.12.1-recommended": "0.1.1",
+	"1.12.1-recommended": "0.1.1"
+  }
+}
