@@ -1,2 +1,2 @@
-# PixelmonExtension
-This extension adds additional functionality for use with Pixelmon.
+# PixelmonInformation
+This extension adds additional Information for use with Pixelmon.
