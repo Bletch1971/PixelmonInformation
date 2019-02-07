@@ -6,6 +6,6 @@
   },
   "1.12.2":{
     "0.1.4": "Initial release for Pixelmon 7.0.0.",
-    "0.1.5": "Added dungeon loot support"  
+    "0.1.5": "Added dungeon loot and poke chest loot support"  
   }
 }
