@@ -1,11 +1,12 @@
 {
   "homepage": "https://github.com/Bletch1971/PixelmonInformation",
   "promos": {
-    "1.12.2-latest": "0.1.5",
-    "1.12.2-recommended": "0.1.4"
+    "1.12.2-latest": "0.1.6",
+    "1.12.2-recommended": "0.1.6"
   },
   "1.12.2":{
     "0.1.4": "Initial release for Pixelmon 7.0.0.",
-    "0.1.5": "Added dungeon loot and poke chest loot support"  
+    "0.1.5": "Added dungeon loot and poke chest loot support.",
+	"0.1.6": "Added pokemon drops, pokemon boss drops and shop keeper items support."  
   }
 }
