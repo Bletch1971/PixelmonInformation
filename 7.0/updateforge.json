@@ -1,8 +1,8 @@
 {
   "homepage": "https://github.com/Bletch1971/PixelmonInformation",
   "promos": {
-    "1.12.2-latest": "0.2.5",
-    "1.12.2-recommended": "0.2.5"
+    "1.12.2-latest": "0.2.6",
+    "1.12.2-recommended": "0.2.6"
   },
   "1.12.2":{
     "0.1.4": "Initial release for Pixelmon 7.0.0.",
@@ -15,6 +15,7 @@
     "0.2.2": "Added pokemon description, pokedex number, type information and caught status to Waila.",
     "0.2.3": "Added more tooltips and information text.",
     "0.2.4": "added gender and generation to the WAILA output",
-    "0.2.5": "Fixed the setting names and descriptions."
+    "0.2.5": "Fixed the setting names and descriptions.",
+    "0.2.6": "Fixed exception when populating the Pokemon Name in Waila header."
   }
 }
