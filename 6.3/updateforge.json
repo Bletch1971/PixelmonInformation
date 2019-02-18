@@ -1,8 +1,8 @@
 {
   "homepage": "https://github.com/Bletch1971/PixelmonInformation",
   "promos": {
-    "1.12.2-latest": "0.2.7",
-    "1.12.2-recommended": "0.2.7"
+    "1.12.2-latest": "0.2.8",
+    "1.12.2-recommended": "0.2.8"
   },
   "1.12.2":{
     "0.1.1": "Initial alpha release.",
@@ -15,6 +15,7 @@
     "0.2.4": "Added gender and generation to the WAILA output",
     "0.2.5": "Fixed the setting names and descriptions.",
     "0.2.6": "Fixed exception when populating the Pokemon Name in Waila header.",
-    "0.2.7": "Fixed localisation of pokemon species name. Added Boss name, nickname and owner name."
+    "0.2.7": "Fixed localisation of pokemon species name. Added Boss name, nickname and owner name.",
+    "0.2.8": "Added Pokemon Level, fixed bug when hosting via LAN."
   }
 }
