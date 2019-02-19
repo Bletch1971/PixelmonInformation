@@ -1,8 +1,8 @@
 {
-  "homepage": "https://github.com/Bletch1971/PixelmonInformation",
+  "homepage": "https://minecraft.curseforge.com/projects/pixelmon-information",
   "promos": {
-    "1.12.2-latest": "0.2.8",
-    "1.12.2-recommended": "0.2.8"
+    "1.12.2-latest": "0.2.9",
+    "1.12.2-recommended": "0.2.9"
   },
   "1.12.2":{
     "0.1.1": "Initial alpha release.",
@@ -11,11 +11,12 @@
     "0.1.9": "Added dungeon loot, poke chest loot, pokemon drops, pokemon boss drops and shop keeper items support.",
     "0.2.1": "Added pokemon description and type match-ups to tooltip.",
     "0.2.2": "Added pokemon description, pokedex number, type information and caught status to Waila.",
-    "0.2.3": "Added more tooltips and information text.",
+    "0.2.3": "Added additional tooltips and information text.",
     "0.2.4": "Added gender and generation to the WAILA output",
     "0.2.5": "Fixed the setting names and descriptions.",
     "0.2.6": "Fixed exception when populating the Pokemon Name in Waila header.",
     "0.2.7": "Fixed localisation of pokemon species name. Added Boss name, nickname and owner name.",
-    "0.2.8": "Added Pokemon Level, fixed bug when hosting via LAN."
+    "0.2.8": "Added Pokemon Level, fixed bug when hosting via LAN.",
+    "0.2.9": "Added additional tooltips and information text."
   }
 }
