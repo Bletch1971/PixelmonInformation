@@ -1,8 +1,8 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/pixelmon-information",
   "promos": {
-    "1.12.2-latest": "0.2.9",
-    "1.12.2-recommended": "0.2.9"
+    "1.12.2-latest": "0.3.0",
+    "1.12.2-recommended": "0.3.0"
   },
   "1.12.2":{
     "0.1.1": "Initial alpha release.",
@@ -17,6 +17,7 @@
     "0.2.6": "Fixed exception when populating the Pokemon Name in Waila header.",
     "0.2.7": "Fixed localisation of pokemon species name. Added Boss name, nickname and owner name.",
     "0.2.8": "Added Pokemon Level, fixed bug when hosting via LAN.",
-    "0.2.9": "Added additional tooltips and information text. Fixed crash when WAILA mod not installed."
+    "0.2.9": "Added additional tooltips and information text. Fixed crash when WAILA mod not installed.",
+    "0.3.0": "Implement The One Probe.\nAdded config option to show Waila and The One Probe information only when sneaking."
   }
 }
