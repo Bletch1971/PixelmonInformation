@@ -1,10 +1,11 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/pixelmon-information",
   "promos": {
-    "1.12.2-latest": "0.3.2",
-    "1.12.2-recommended": "0.3.2"
+    "1.12.2-latest": "0.3.3",
+    "1.12.2-recommended": "0.3.3"
   },
   "1.12.2":{
-    "0.3.2": "Added the EV Yield to WAILA and The One Probe, with option to show/hide."
+    "0.3.2": "Added the EV Yield to WAILA and The One Probe, with option to show/hide.",
+    "0.3.3": "Updated forge version (14.23.5.2838).\nUpdated JEI version (4.15.0.293).\nFixed the WAILA and The One Probe description text so that is wraps nicely on screen."
   }
 }
