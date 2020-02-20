@@ -1,8 +1,8 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/pixelmon-information",
   "promos": {
-    "1.12.2-latest": "0.3.2",
-    "1.12.2-recommended": "0.3.2"
+    "1.12.2-latest": "0.3.3",
+    "1.12.2-recommended": "0.3.3"
   },
   "1.12.2":{
     "0.1.1": "Initial alpha release.",
@@ -20,6 +20,7 @@
     "0.2.9": "Added additional tooltips and information text. Fixed crash when WAILA mod not installed.",
     "0.3.0": "Implement The One Probe.\nAdded config option to show Waila and The One Probe information only when sneaking.",
     "0.3.1": "Fixed the Caught information in WAILA and The One Probe.\nAdded config option to show/hide the Shift Information in the tooltip.",
-    "0.3.2": "Added the EV Yield to WAILA and The One Probe, with option to show/hide."
+    "0.3.2": "Added the EV Yield to WAILA and The One Probe, with option to show/hide.",
+    "0.3.3": "Fixed the WAILA and The One Probe description text so that is wraps nicely on screen."
   }
 }
