@@ -1,0 +1,10 @@
+{
+  "homepage": "https://minecraft.curseforge.com/projects/pixelmon-information",
+  "promos": {
+    "1.12.2-latest": "0.3.6",
+    "1.12.2-recommended": "0.3.6"
+  },
+  "1.12.2":{
+    "0.3.6": "Enabled TOP to be used on servers - Block description and information are not shown when connected to a server."
+  }
+}
