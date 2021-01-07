@@ -1,0 +1,26 @@
+{
+    "modListVersion": 2,
+    "modList": [{
+        "modid": "pixelmoninformation",
+        "name": "Pixelmon Information",
+        "description": "§fThis extension adds additional information for use with §bPixelmon§a ${pixelmon_version}§f.
+§fBuilt with:
+    §bForge§f ${forge_version}
+    §bJEI§f ${jei_version}
+    §bHwyla§f ${hwyla_version}
+    §bThe One Probe§f ${top_version}",
+        "version": "${mod_version}",
+        "mcversion": "${minecraft_version}",
+        "url": "https://github.com/Bletch1971/PixelmonInformation",
+        "updateUrl": "",
+        "authorList": ["§6Bletch§r"],
+        "credits": "Pixelmon Development Team",
+        "logoFile": "assets/pixelmoninformation/textures/logo.png",
+        "screenshots": [],
+        "parent": "",
+        "requiredMods": ["pixelmon"],
+        "dependencies": ["jei", "waila", "theoneprobe"],
+        "dependants": [],
+        "useDependencyInformation": true
+    }]
+}
