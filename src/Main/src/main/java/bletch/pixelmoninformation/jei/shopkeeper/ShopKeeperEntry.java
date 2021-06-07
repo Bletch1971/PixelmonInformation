@@ -90,6 +90,7 @@ public class ShopKeeperEntry extends IForgeRegistryEntry.Impl<ShopKeeperEntry> {
     	nameToLocalKeyMap.put("pokemartmain3", "jei.shopkeeper.pokemartmain3.name");
     	nameToLocalKeyMap.put("pokemartsecond1", "jei.shopkeeper.pokemartsecond1.name");
     	nameToLocalKeyMap.put("pokemartsecond2", "jei.shopkeeper.pokemartsecond2.name");
+    	nameToLocalKeyMap.put("pokemartsecond3", "jei.shopkeeper.pokemartsecond3.name");
     	nameToLocalKeyMap.put("spawn1", "jei.shopkeeper.spawn1.name");
 		
 	}

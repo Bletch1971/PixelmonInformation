@@ -22,7 +22,7 @@ public class PokemonBossEntry extends IForgeRegistryEntry.Impl<PokemonBossEntry>
     public PokemonBossEntry(PokemonBossDrop drop) {
 		this.drop = drop;
 		
-		String resourcePath = ModDetails.MOD_ID + "/" + this.drop.getType().getName();
+		String resourcePath = ModDetails.MOD_ID + "/boss_drops_" + this.drop.getBossMode().name();
         setRegistryName(new ResourceLocation(ModDetails.MOD_ID_JEI, resourcePath));
 	}
     
@@ -37,7 +37,7 @@ public class PokemonBossEntry extends IForgeRegistryEntry.Impl<PokemonBossEntry>
     }
     
     public String getLocalisedName() {
-    	return this.drop.getType().getLocalisedName();
+    	return this.drop.getBossMode().getLocalizedName();
     }
     
 }

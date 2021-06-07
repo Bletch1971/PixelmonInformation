@@ -4,22 +4,23 @@ import java.util.ArrayList;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import bletch.pixelmoninformation.jei.enums.EnumPokemonBossType;
+import com.pixelmonmod.pixelmon.enums.EnumBossMode;
+
 import net.minecraft.item.ItemStack;
 
 @ParametersAreNonnullByDefault
 public class PokemonBossDrop {
 
-	private EnumPokemonBossType type;
+	private EnumBossMode bossMode;
 	private ArrayList<ItemStack> drops;
 	
-	public PokemonBossDrop(EnumPokemonBossType type, ArrayList<ItemStack> drops) {
-		this.type = type;
+	public PokemonBossDrop(EnumBossMode bossMode, ArrayList<ItemStack> drops) {
+		this.bossMode = bossMode;
 		this.drops = drops;
 	}
 	
-	public EnumPokemonBossType getType() {
-		return this.type;
+	public EnumBossMode getBossMode() {
+		return this.bossMode;
 	}
 	
 	public ArrayList<ItemStack> getDrops() {

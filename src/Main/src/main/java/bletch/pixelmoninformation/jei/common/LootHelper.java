@@ -2,6 +2,7 @@ package bletch.pixelmoninformation.jei.common;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,10 +15,10 @@ import com.pixelmonmod.pixelmon.entities.npcs.registry.DropItemRegistry;
 import com.pixelmonmod.pixelmon.entities.npcs.registry.PokemonDropInformation;
 import com.pixelmonmod.pixelmon.entities.npcs.registry.ServerNPCRegistry;
 import com.pixelmonmod.pixelmon.entities.npcs.registry.ShopkeeperData;
+import com.pixelmonmod.pixelmon.enums.EnumBossMode;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 
 import bletch.pixelmoninformation.jei.enums.EnumPokeChestTier;
-import bletch.pixelmoninformation.jei.enums.EnumPokemonBossType;
 import bletch.pixelmoninformation.core.ModDetails;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -155,27 +156,27 @@ public class LootHelper {
     }    
     
     public static List<PokemonBossDrop> getAllPixelmonPokemonBossDrops() {
-    	ArrayList<PokemonBossDrop> list = new ArrayList<>();
+    	final ArrayList<PokemonBossDrop> drops = new ArrayList<>();
 
     	try {
-    		list.add(new PokemonBossDrop(EnumPokemonBossType.BOSS, DropItemRegistry.bossDrops));
+        	HashMap<EnumBossMode, ArrayList<ItemStack>> bossDrops = DropItemRegistry.bossDrops;
+			if (bossDrops == null) {
+				ModDetails.MOD_LOGGER.error("An issue occured on fetching DropItemRegistry.bossDrops.");
+				return new ArrayList<PokemonBossDrop>();
+			}
+			
+        	bossDrops.entrySet().stream()
+        		.filter(d -> d.getKey().isBossPokemon() && d.getValue() != null && d.getValue().size() > 0)
+        		.sorted((d1, d2) -> d1.getKey().compareTo(d2.getKey()))
+        		.map(d -> new PokemonBossDrop(d.getKey(), d.getValue()))
+        		.forEach(drops::add);
+        	
+        	return drops;
     	}
     	catch (Exception ex) {
+    		ModDetails.MOD_LOGGER.error("Error processing bossDrops.\n" + ex.getMessage());
+    		return new ArrayList<PokemonBossDrop>();
     	}
-
-    	try {
-    		list.add(new PokemonBossDrop(EnumPokemonBossType.MEGABOSS, DropItemRegistry.megaBossDrops));
-    	}
-    	catch (Exception ex) {
-    	}
-    	
-    	try {
-    		list.add(new PokemonBossDrop(EnumPokemonBossType.SHINEYMEGABOSS, DropItemRegistry.shinyMegaBossDrops));
-    	}
-    	catch (Exception ex) {
-    	}
-
-        return list;
     }
 
 	public static List<PokemonDrop> getAllPixelmonDrops() {

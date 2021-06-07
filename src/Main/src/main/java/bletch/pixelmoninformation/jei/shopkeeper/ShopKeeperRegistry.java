@@ -1,8 +1,11 @@
 package bletch.pixelmoninformation.jei.shopkeeper;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import com.pixelmonmod.pixelmon.entities.npcs.registry.ShopkeeperData;
 
 import bletch.pixelmoninformation.jei.common.LootHelper;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -39,7 +42,8 @@ public class ShopKeeperRegistry {
 			return;
 		}
 		
-		LootHelper.getAllPixelmonShopKeepers().stream()
+		List<ShopkeeperData> shopKeeperData = LootHelper.getAllPixelmonShopKeepers();
+		shopKeeperData.stream()
 				.map(d -> new ShopKeeperEntry(d))
 				.forEach(e -> addEntry(e));
 	}
