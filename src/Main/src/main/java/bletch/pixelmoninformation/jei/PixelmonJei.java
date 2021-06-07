@@ -19,6 +19,10 @@ import bletch.pixelmoninformation.jei.anvil.AnvilCategory;
 import bletch.pixelmoninformation.jei.anvil.AnvilEntry;
 import bletch.pixelmoninformation.jei.anvil.AnvilRegistry;
 import bletch.pixelmoninformation.jei.anvil.AnvilWrapper;
+import bletch.pixelmoninformation.jei.brewing.BrewingCategory;
+import bletch.pixelmoninformation.jei.brewing.BrewingEntry;
+import bletch.pixelmoninformation.jei.brewing.BrewingRegistry;
+import bletch.pixelmoninformation.jei.brewing.BrewingWrapper;
 import bletch.pixelmoninformation.jei.dungeon.DungeonCategory;
 import bletch.pixelmoninformation.jei.dungeon.DungeonEntry;
 import bletch.pixelmoninformation.jei.dungeon.DungeonRegistry;
@@ -59,6 +63,8 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.inventory.GuiBrewingStand;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -164,6 +170,7 @@ public class PixelmonJei implements IModPlugin {
     			categories.add(new AnvilCategory());
         		categories.add(new MechanicalAnvilCategory());
         		categories.add(new InfuserCategory());
+        		categories.add(new BrewingCategory());
     		}
     		catch (Exception ex) {
     			ModDetails.MOD_LOGGER.error(ex.getMessage());
@@ -386,6 +393,23 @@ public class PixelmonJei implements IModPlugin {
 		catch (Exception e) {
 			ModDetails.MOD_LOGGER.error("Error registering infuser recipes with JEI");
 		}
+
+		try {
+			ModDetails.MOD_LOGGER.info("Registering brewing recipes with JEI");
+			
+			BrewingRegistry.initialize();
+
+			registry.handleRecipes(BrewingEntry.class, BrewingWrapper::new, PixelmonJei.getJeiUid(BrewingCategory.CATEGORY));
+			registry.addRecipes(BrewingRegistry.getValidEntries(), PixelmonJei.getJeiUid(BrewingCategory.CATEGORY));
+			registry.addRecipeCatalyst(new ItemStack(Items.BREWING_STAND), PixelmonJei.getJeiUid(BrewingCategory.CATEGORY));
+			registry.addRecipeClickArea(GuiBrewingStand.class, 63, 15, 12, 27, PixelmonJei.getJeiUid(BrewingCategory.CATEGORY));	
+			
+			ModDetails.MOD_LOGGER.info("Registered brewing recipes with JEI - count: " + BrewingRegistry.getValidEntries().size());	
+		}
+		catch (Exception e) {
+			ModDetails.MOD_LOGGER.error("Error registering brewing recipes with JEI");
+		}
+
 	}
 	
 	private static void registerDungeonLoot(IModRegistry registry) {

@@ -6,6 +6,8 @@ import bletch.pixelmoninformation.core.ModConfig;
 import bletch.pixelmoninformation.core.ModDetails;
 import bletch.pixelmoninformation.jei.anvil.AnvilEntry;
 import bletch.pixelmoninformation.jei.anvil.AnvilRegistry;
+import bletch.pixelmoninformation.jei.brewing.BrewingEntry;
+import bletch.pixelmoninformation.jei.brewing.BrewingRegistry;
 import bletch.pixelmoninformation.jei.dungeon.DungeonEntry;
 import bletch.pixelmoninformation.jei.dungeon.DungeonRegistry;
 import bletch.pixelmoninformation.jei.infuser.InfuserEntry;
@@ -54,6 +56,14 @@ public class RegistrationHandler {
 					new RegistryBuilder<InfuserEntry>()
 						.setName(new ResourceLocation(ModDetails.MOD_ID, "pi_infuser_recipes"))
 						.setType(InfuserEntry.class)
+		                .disableSaving()
+		                .allowModification()
+		                .create());
+	
+			BrewingRegistry.setRegistry(
+					new RegistryBuilder<BrewingEntry>()
+						.setName(new ResourceLocation(ModDetails.MOD_ID, "pi_brewing_recipes"))
+						.setType(BrewingEntry.class)
 		                .disableSaving()
 		                .allowModification()
 		                .create());
@@ -121,6 +131,10 @@ public class RegistrationHandler {
 	
 	@SubscribeEvent
 	public static void registerInfuserEntries(RegistryEvent.Register<InfuserEntry> event) {
+	}
+	
+	@SubscribeEvent
+	public static void registerBrewingEntries(RegistryEvent.Register<BrewingEntry> event) {
 	}
 	
 	@SubscribeEvent

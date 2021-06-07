@@ -357,6 +357,9 @@ jei.mechanicalanvil.title=Mechanical Anvil
 #== Infuser ==
 jei.infuser.title=Infuser
 
+#== Brewing Stand ==
+jei.brewer.title=Brewing Stand
+
 #== Dungeons Tab ==
 jei.dungeonchest.title=Dungeon Chests
 jei.dungeonchest.abandoned_mineshaft.name=Mineshaft
