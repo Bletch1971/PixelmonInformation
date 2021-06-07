@@ -102,7 +102,7 @@ public class PixelmonBlockTop {
 				}
 
 				String output = TextUtils.translate(translateKey_tooltip);
-				List<String> results = StringUtils.split(output, minecraft, 4, true);
+				List<String> results = StringUtils.split(output, minecraft, 4, true, true);
 				
 				if (results != null && !results.isEmpty()) {
 					results.forEach(r -> probeInfo.text(r));

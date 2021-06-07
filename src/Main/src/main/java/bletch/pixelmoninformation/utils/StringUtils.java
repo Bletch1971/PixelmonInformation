@@ -19,7 +19,7 @@ public class StringUtils {
 		return (value == null || value.trim().length() == 0);
 	}
 	
-	public static List<String> split(String text, int displayWidth, FontRenderer fontRenderer, int maxLines) {
+	public static List<String> split(String text, int displayWidth, FontRenderer fontRenderer, int maxLines, boolean includeStartingFormatting) {
 		if (isNullOrWhitespace(text) || fontRenderer == null) {
 			return new ArrayList<String>();
 		}
@@ -58,7 +58,7 @@ public class StringUtils {
 					output += delimiter + part;
 					delimiter = " ";
 					
-					if (part.startsWith(SYMBOL_FORMATTING)) {
+					if (includeStartingFormatting && part.startsWith(SYMBOL_FORMATTING)) {
 						formatting = part.substring(0, 2);
 					}
 				}       			
@@ -77,10 +77,14 @@ public class StringUtils {
 	}
 	
 	public static List<String> split(String text, Minecraft minecraft, int maxLines) {
-		return split(text, minecraft, maxLines, false);
+		return split(text, minecraft, maxLines, true, false);
 	}
 	
-	public static List<String> split(String text, Minecraft minecraft, int maxLines, boolean alwaysReturnText) {
+	public static List<String> split(String text, Minecraft minecraft, int maxLines, boolean includeStartingFormatting) {
+		return split(text, minecraft, maxLines, includeStartingFormatting, false);
+	}
+	
+	public static List<String> split(String text, Minecraft minecraft, int maxLines, boolean includeStartingFormatting, boolean alwaysReturnText) {
 		if (isNullOrWhitespace(text) || minecraft == null) {
 			List<String> result = new ArrayList<String>();
 
@@ -94,6 +98,6 @@ public class StringUtils {
 		ScaledResolution resolution = new ScaledResolution(minecraft);
 		int displayWidth = resolution.getScaledWidth() / 3;
 
-		return split(text, displayWidth, minecraft.fontRenderer, maxLines);
+		return split(text, displayWidth, minecraft.fontRenderer, maxLines, includeStartingFormatting);
 	}
 }

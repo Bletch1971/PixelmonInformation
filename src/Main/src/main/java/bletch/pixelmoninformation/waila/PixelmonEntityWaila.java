@@ -254,7 +254,7 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 				List<String> results = StringUtils.split(output, minecraft, 4);
 				
 				if (results != null && !results.isEmpty()) {
-					currentTip.addAll(results);
+					results.forEach(r -> currentTip.add(r));
 				}
 			}
 			
@@ -315,8 +315,9 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 	        	int percentage = (int) ((100.0 / maxTotal) * total);
 	        	output += " " + total + "/" + maxTotal + TextFormatting.WHITE + " (" + percentage + "%) - " + output2;
 	        	
-				if (!StringUtils.isNullOrWhitespace(output)) {
-					currentTip.add(output);
+	        	List<String> results = StringUtils.split(output, minecraft, 4, false);
+				if (results != null && !results.isEmpty()) {
+					results.forEach(r -> currentTip.add(TextFormatting.WHITE + r));
 				}
 			}		
 			
@@ -347,8 +348,9 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 	        	int percentage = (int) ((100.0 / maxTotal) * total);
 	        	output += " " + total + "/" + maxTotal + TextFormatting.WHITE + " (" + percentage + "%) - " + output2;
 	        	
-				if (!StringUtils.isNullOrWhitespace(output)) {
-					currentTip.add(output);
+	        	List<String> results = StringUtils.split(output, minecraft, 4, false);
+				if (results != null && !results.isEmpty()) {
+					results.forEach(r -> currentTip.add(TextFormatting.WHITE + r));
 				}
 			}
 			

@@ -176,8 +176,9 @@ public class PixelmonEntityTop {
 			        	int percentage = (int) ((100.0 / maxTotal) * total);
 			        	output += " " + total + "/" + maxTotal + TextFormatting.WHITE + " (" + percentage + "%) - " + output2;
 			        	
-						if (!StringUtils.isNullOrWhitespace(output)) {
-							probeInfo.text(output);
+						List<String> results = StringUtils.split(output, minecraft, 4, false);						
+						if (results != null && !results.isEmpty()) {
+							results.forEach(r -> probeInfo.text(TextFormatting.WHITE + r));
 						}
 			        }
 				}		
@@ -211,8 +212,9 @@ public class PixelmonEntityTop {
 			        	int percentage = (int) ((100.0 / maxTotal) * total);
 			        	output += " " + total + "/" + maxTotal + TextFormatting.WHITE + " (" + percentage + "%) - " + output2;
 			        	
-						if (!StringUtils.isNullOrWhitespace(output)) {
-							probeInfo.text(output);
+						List<String> results = StringUtils.split(output, minecraft, 4, false);						
+						if (results != null && !results.isEmpty()) {
+							results.forEach(r -> probeInfo.text(TextFormatting.WHITE + r));
 						}
 			        }
 				}
