@@ -377,6 +377,22 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 		        }
 			}			
 
+			if (ModConfig.waila.entities.showPokemonNatureInformation) {
+				String delimiter = " ";
+				String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.nature") + TextFormatting.WHITE;
+				
+				Pokemon pokemon = pixelmon.getPokemonData();
+				
+				if (pokemon != null) {
+					output += delimiter;
+					output += pokemon.getNature().getLocalizedName();
+				}
+				
+				if (!StringUtils.isNullOrWhitespace(output)) {
+					currentTip.add(output);
+				}
+			}
+			
 			if (ModConfig.waila.entities.showPokemonTypeInformation) {
 				// show the type information	
 		        String delimiter = " ";

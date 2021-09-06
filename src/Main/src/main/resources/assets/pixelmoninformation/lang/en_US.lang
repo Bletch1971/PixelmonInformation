@@ -78,6 +78,7 @@ gui.shopitem.canvary=Can Price Vary:
 gui.pokemon.evyield=EV Yield:
 gui.pokemon.evstats=EV Stats:
 gui.pokemon.ivstats=IV Stats:
+gui.pokemon.nature=Nature:
 gui.pokemon.type=Type:
 gui.pokemon.owner=Owner:
 gui.pokemon.level=Level:

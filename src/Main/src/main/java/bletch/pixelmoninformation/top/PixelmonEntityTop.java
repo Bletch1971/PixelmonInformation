@@ -242,6 +242,23 @@ public class PixelmonEntityTop {
 			        }
 				}			
 				
+				if (ModConfig.top.entities.showPokemonNatureInformation) {
+					String delimiter = " ";
+					String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.nature") + TextFormatting.WHITE;
+					
+					if (pokemon == null) {
+	        	pokemon = entity.getPokemonData();
+	        }
+					if (pokemon != null) {
+						output += delimiter;
+						output += pokemon.getNature().getLocalizedName();
+					}
+					
+					if (!StringUtils.isNullOrWhitespace(output)) {
+						probeInfo.text(output);
+					}
+				}
+				
 				if (ModConfig.top.entities.showPokemonTypeInformation) {
 					// show the type information	
 			        String delimiter = " ";
