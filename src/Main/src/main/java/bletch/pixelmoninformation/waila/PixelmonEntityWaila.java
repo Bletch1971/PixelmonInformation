@@ -22,6 +22,7 @@ import com.pixelmonmod.pixelmon.entities.pixelmon.stats.IVStore;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.Level;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.StatsType;
 import com.pixelmonmod.pixelmon.enums.EnumBossMode;
+import com.pixelmonmod.pixelmon.enums.EnumNature;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.pixelmonmod.pixelmon.enums.EnumType;
 import com.pixelmonmod.pixelmon.pokedex.Pokedex;
@@ -48,6 +49,7 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 	
 	private static String NBT_TAG_EVSTORE = "pokemon_evstore";
 	private static String NBT_TAG_IVSTORE = "pokemon_ivstore";
+	private static String NBT_TAG_NATURE = "pokemon_nature";
 	
 	@Override
     public Entity getWailaOverride(IWailaEntityAccessor accessor, IWailaConfigHandler config) {
@@ -375,7 +377,28 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 						currentTip.add(output);
 					}		        	
 		        }
-			}			
+			}
+
+			if (tag.hasKey(NBT_TAG_NATURE) && ModConfig.waila.entities.showPokemonNatureInformation) {
+				String delimiter = " ";
+				String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.nature") + TextFormatting.WHITE;
+
+				Pokemon pokemon = pixelmon.getPokemonData();
+
+				if (pokemon != null) {
+					int natureIndex = tag.getInteger(NBT_TAG_NATURE);
+					EnumNature nature = EnumNature.getNatureFromIndex(natureIndex);
+
+					if (nature != null) {
+						output += delimiter;
+						output += nature.getLocalizedName();
+					}
+				}
+
+				if (!StringUtils.isNullOrWhitespace(output)) {
+					currentTip.add(output);
+				}
+			}
 
 			if (ModConfig.waila.entities.showPokemonTypeInformation) {
 				// show the type information	
@@ -469,9 +492,12 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 				NBTTagCompound ivTag = new NBTTagCompound();
 				IVStore ivStore = pokemon.getIVs();
 				ivStore.writeToNBT(ivTag);
-				
+
+				EnumNature nature = pokemon.getNature();
+
 				tag.setTag(NBT_TAG_EVSTORE, evTag);
-				tag.setTag(NBT_TAG_IVSTORE, ivTag);				
+				tag.setTag(NBT_TAG_IVSTORE, ivTag);
+				tag.setInteger(NBT_TAG_NATURE, nature.index);
 			}
 		}
 		

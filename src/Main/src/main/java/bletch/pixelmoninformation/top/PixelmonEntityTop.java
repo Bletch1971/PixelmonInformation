@@ -16,6 +16,7 @@ import com.pixelmonmod.pixelmon.entities.pixelmon.stats.IVStore;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.Level;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.StatsType;
 import com.pixelmonmod.pixelmon.enums.EnumBossMode;
+import com.pixelmonmod.pixelmon.enums.EnumNature;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.pixelmonmod.pixelmon.enums.EnumType;
 import com.pixelmonmod.pixelmon.pokedex.Pokedex;
@@ -240,7 +241,28 @@ public class PixelmonEntityTop {
 							probeInfo.text(output);
 						}		        	
 			        }
-				}			
+				}
+
+				if (minecraft != null && ModConfig.top.entities.showPokemonNatureInformation) {
+					String delimiter = " ";
+					String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.nature") + TextFormatting.WHITE;
+
+					if (pokemon == null) {
+						pokemon = entity.getPokemonData();
+					}
+					if (pokemon != null) {
+						EnumNature nature = pokemon.getNature();
+
+						if (nature != null) {
+							output += delimiter;
+							output += nature.getLocalizedName();
+						}
+					}
+
+					if (!StringUtils.isNullOrWhitespace(output)) {
+						probeInfo.text(output);
+					}
+				}
 				
 				if (ModConfig.top.entities.showPokemonTypeInformation) {
 					// show the type information	
