@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public class ModDetails {
 	private static final int VersionMajor = 0;
 	private static final int VersionMinor = 4;
-	private static final int VersionRevision = 0;
+	private static final int VersionRevision = 1;
 
 	public static final String MOD_ID = "pixelmoninformation";
 	public static final String MOD_NAME = "PixelmonInformation";
