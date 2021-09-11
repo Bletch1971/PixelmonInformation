@@ -1,11 +1,12 @@
 {
   "homepage": "https://minecraft.curseforge.com/projects/pixelmon-information",
   "promos": {
-    "1.12.2-latest": "0.3.9",
-    "1.12.2-recommended": "0.3.9"
+    "1.12.2-latest": "0.4.0",
+    "1.12.2-recommended": "0.4.0"
   },
   "1.12.2":{
     "0.3.8": "Updated for Pixelmon 8.2.\nFixed Boss Drop in JEI.",
-    "0.3.9": "Added Brewing Recipes to JEI."
+    "0.3.9": "Added Brewing Recipes to JEI.",
+    "0.4.0": "Added Nature Information to WAILA and The One Probe, with option to show/hide."
   }
 }
