@@ -8,13 +8,14 @@ if "%DIRNAME%" == "" set DIRNAME=.
 cd /d "%DIRNAME%"
 
 rmdir build\classes /S /Q
+rmdir build\libs /S /Q
 rmdir build\sources /S /Q
 rmdir build\resources /S /Q
 
 call gradlew.bat build
 
-xcopy "build\libs\*.jar" "..\..\8.2\*.jar" /Y /Q
-xcopy "updateforge.json" "..\..\8.2\updateforge.json" /Y /Q
+xcopy "build\libs\*.jar" "..\..\beta\8.2\*.jar" /Y /Q
+xcopy "updateforge.json" "..\..\beta\8.2\updateforge.json" /Y /Q
 
 cd /d "%WORKDIR%"
 
