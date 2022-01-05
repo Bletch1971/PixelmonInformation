@@ -14,8 +14,8 @@ rmdir build\resources /S /Q
 
 call gradlew.bat build
 
-xcopy "build\libs\*.jar" "..\..\beta\8.2\*.jar" /Y /Q
-xcopy "updateforge.json" "..\..\beta\8.2\updateforge.json" /Y /Q
+xcopy "build\libs\*.jar" "..\..\beta\8.3\*.jar" /Y /Q
+xcopy "updateforge.json" "..\..\beta\8.3\updateforge.json" /Y /Q
 
 cd /d "%WORKDIR%"
 
