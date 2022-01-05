@@ -50,7 +50,7 @@ dependencies {
     deobfCompile "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:${project.top_version}"
     
-	compile files('../../../../JavaWorkspaces/pixelmon/Pixelmon-1.12.2-8.2.0-server.jar')
+	compile files('../../../../JavaWorkspaces/pixelmon/Pixelmon-1.12.2-8.3.6-server.jar')
 }
 
 //Creates a compiled de-obfuscated jar
