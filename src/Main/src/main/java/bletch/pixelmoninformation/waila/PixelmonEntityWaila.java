@@ -303,7 +303,7 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 		        int total = 0;
 	        	
 	        	for (StatsType type : statTypes) {
-	        		int value = store.get(type);
+	        		int value = store.getStat(type);
 	        		total += value;
 	        		
 	        		output2 += delimiter;
@@ -336,7 +336,7 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 	        	int total = 0;
 	        	
 	        	for (StatsType type : statTypes) {
-	        		int value = store.get(type);
+	        		int value = store.getStat(type);
 	        		total += value;
 	        		
 	        		output2 += delimiter;
@@ -455,7 +455,7 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 					Pokedex pokedex = PixelmonUtils.getClientPokedex();
 					
 					if (pokedex != null) {
-						caughtStatus = pokedex.hasCaught(pokemonSpecies.getNationalPokedexInteger()) ? TextUtils.SYMBOL_GREENTICK : TextUtils.SYMBOL_REDCROSS;
+						caughtStatus = pokedex.hasCaught(pokemonSpecies) ? TextUtils.SYMBOL_GREENTICK : TextUtils.SYMBOL_REDCROSS;
 					}	
 					
 					String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.caught") + " " + caughtStatus;
@@ -476,9 +476,9 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 
 	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP player, Entity entity, NBTTagCompound tag, World world) {
-		if (entity != null) {
-			entity.writeToNBT(tag);
-		}
+//		if (entity != null) {
+//			entity.writeToNBT(tag);
+//		}
 		
 		if (entity instanceof EntityPixelmon) {
 			EntityPixelmon pixelmon = ((EntityPixelmon)entity);

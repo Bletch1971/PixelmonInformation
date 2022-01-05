@@ -163,7 +163,7 @@ public class PixelmonEntityTop {
 				        int total = 0;
 			        	
 			        	for (StatsType type : statTypes) {
-			        		int value = store.get(type);
+			        		int value = store.getStat(type);
 			        		total += value;
 			        		
 			        		output2 += delimiter;
@@ -199,7 +199,7 @@ public class PixelmonEntityTop {
 			        	int total = 0;
 			        	
 			        	for (StatsType type : statTypes) {
-			        		int value = store.get(type);
+			        		int value = store.getStat(type);
 			        		total += value;
 			        		
 			        		output2 += delimiter;
@@ -319,7 +319,7 @@ public class PixelmonEntityTop {
 						Pokedex pokedex = PixelmonUtils.getClientPokedex();
 						
 						if (pokedex != null) {
-							caughtStatus = pokedex.hasCaught(pokemonSpecies.getNationalPokedexInteger()) ? TextUtils.SYMBOL_GREENTICK : TextUtils.SYMBOL_REDCROSS;
+							caughtStatus = pokedex.hasCaught(pokemonSpecies) ? TextUtils.SYMBOL_GREENTICK : TextUtils.SYMBOL_REDCROSS;
 						}	
 						
 						String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.caught") + " " + caughtStatus;
