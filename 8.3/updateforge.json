@@ -4,7 +4,7 @@
     "1.12.2-latest": "0.4.1",
     "1.12.2-recommended": "0.4.1"
   },
-  "1.12.2":{
-    "0.4.1": "Updated for Pixelmon 8.2.\nFixed crashing bug with WAILA reading NPC Trainer NBT data."
+  "1.12.2": {
+    "0.4.1": "Updated for Pixelmon 8.3.\nFixed crashing bug with WAILA reading NPC Trainer NBT data."
   }
 }
