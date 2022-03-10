@@ -26,6 +26,7 @@ import com.pixelmonmod.pixelmon.entities.pixelmon.stats.IVStore;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.Level;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.StatsType;
 import com.pixelmonmod.pixelmon.enums.EnumBossMode;
+import com.pixelmonmod.pixelmon.enums.EnumGrowth;
 import com.pixelmonmod.pixelmon.enums.EnumNature;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.pixelmonmod.pixelmon.enums.EnumType;
@@ -352,6 +353,27 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
 						output += nature.getLocalizedName();
 					}
 				}
+
+				if (!StringUtils.isNullOrWhitespace(output)) {
+					currentTip.add(output);
+				}
+			}
+
+			if (ModConfig.waila.entities.showPokemonGrowthInformation) {
+				// show the type information	
+		        String delimiter = " ";
+		        String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.growth") + TextFormatting.WHITE;
+		        
+		        Pokemon pokemon = pixelmon.getPokemonData();
+
+				if (pokemon != null) {
+					EnumGrowth growth = pokemon.getGrowth();
+
+					if (growth != null) {
+						output += delimiter;
+						output += growth.getLocalizedName();
+					}		        	
+		        }
 
 				if (!StringUtils.isNullOrWhitespace(output)) {
 					currentTip.add(output);

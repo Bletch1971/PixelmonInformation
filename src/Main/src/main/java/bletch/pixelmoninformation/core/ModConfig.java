@@ -223,6 +223,10 @@ public class ModConfig {
 			@Config.Comment("If true, will show the nature information of the pokémon.")
 			@Config.LangKey("config.waila.entities.showPokemonNatureInformation")
 			public boolean showPokemonNatureInformation = true;
+
+			@Config.Comment("If true, will show the growth information of the pokémon.")
+			@Config.LangKey("config.waila.entities.showPokemonGrowthInformation")
+			public boolean showPokemonGrowthInformation = true;
 			
 			@Config.Comment("If true, will show the EV (effort value) stats of the pokémon.")
 			@Config.LangKey("config.waila.entities.showPokemonEVs")
@@ -313,6 +317,10 @@ public class ModConfig {
 			@Config.Comment("If true, will show the nature information of the pokémon.")
 			@Config.LangKey("config.top.entities.showPokemonNatureInformation")
 			public boolean showPokemonNatureInformation = true;
+
+			@Config.Comment("If true, will show the growth information of the pokémon.")
+			@Config.LangKey("config.top.entities.showPokemonGrowthInformation")
+			public boolean showPokemonGrowthInformation = true;
 			
 			@Config.Comment("If true, will show the EV (effort value) stats of the pokémon.")
 			@Config.LangKey("config.top.entities.showPokemonEVs")

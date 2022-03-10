@@ -16,6 +16,7 @@ import com.pixelmonmod.pixelmon.entities.pixelmon.stats.IVStore;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.Level;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.StatsType;
 import com.pixelmonmod.pixelmon.enums.EnumBossMode;
+import com.pixelmonmod.pixelmon.enums.EnumGrowth;
 import com.pixelmonmod.pixelmon.enums.EnumNature;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.pixelmonmod.pixelmon.enums.EnumType;
@@ -256,6 +257,27 @@ public class PixelmonEntityTop {
 						if (nature != null) {
 							output += delimiter;
 							output += nature.getLocalizedName();
+						}
+					}
+
+					if (!StringUtils.isNullOrWhitespace(output)) {
+						probeInfo.text(output);
+					}
+				}
+
+				if (ModConfig.top.entities.showPokemonGrowthInformation) {
+					String delimiter = " ";
+					String output = TextFormatting.DARK_AQUA + TextUtils.translate("gui.pokemon.growth") + TextFormatting.WHITE;
+
+					if (pokemon == null) {
+						pokemon = entity.getPokemonData();
+					}
+					if (pokemon != null) {
+						EnumGrowth growth = pokemon.getGrowth();
+
+						if (growth != null) {
+							output += delimiter;
+							output += growth.getLocalizedName();
 						}
 					}
 
