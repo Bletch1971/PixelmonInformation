@@ -1,0 +1,10 @@
+{
+  "homepage": "https://minecraft.curseforge.com/projects/pixelmon-information",
+  "promos": {
+    "1.16.5-latest": "2.0.0",
+    "1.16.5-recommended": "2.0.0"
+  },
+  "1.16.5": {
+    "2.0.0": "Updated for Minecraft 1.16.5, Forge 36.2.34 and Pixelmon 9.0."
+  }
+}
