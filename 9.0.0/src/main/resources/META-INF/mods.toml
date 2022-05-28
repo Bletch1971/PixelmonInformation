@@ -1,0 +1,68 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="All rights reserved"
+
+displayURL="https://github.com/Bletch1971/PixelmonInformation"
+issueTrackerURL="https://github.com/Bletch1971/PixelmonInformation/issues"
+
+[[mods]]
+modId="pixelmoninformation"
+version="${mod_version}"
+displayName="Pixelmon Information"
+
+logoFile="logo.png"
+
+credits="Pixelmon Development Team"
+authors="§6Bletch§r"
+
+description='''
+§fThis extension adds additional information for use with §bPixelmon§a ${pixelmon_version}§f.
+§fBuilt with:
+    §bForge§f ${forge_version}
+    §bJEI§f ${jei_version}
+    §bHwyla§f ${hwyla_version}
+    §bThe One Probe§f ${top_version}
+'''
+
+[[dependencies.pixelmoninformation]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.pixelmoninformation]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.pixelmoninformation]]
+    modId="pixelmon"
+    mandatory=true
+    versionRange="[9.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+ 
+[[dependencies.pixelmoninformation]]
+    modId="jei"
+    mandatory=false
+    versionRange="[7.0.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.pixelmoninformation]]
+    modId="waila"
+    mandatory=false
+    versionRange="[1.10.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.pixelmoninformation]]
+    modId="theoneprobe"
+    mandatory=false
+    versionRange="[1.16-3.0.7,)"
+    ordering="AFTER"
+    side="BOTH"
+   

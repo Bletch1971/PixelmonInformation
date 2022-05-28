@@ -1,0 +1,154 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+
+version = project.mod_version
+group = project.group_name
+archivesBaseName = "${project.mod_name}-${project.minecraft_version}-${project.pixelmon_version}"
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+minecraft {
+    mappings channel: project.minecraft_channel, version: project.minecraft_version
+    //mappings channel: "snapshot", version: "20200723-1.16.1"
+    //mappings channel: "snapshot", version: "20210309-1.16.5"
+    
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    // Default run configurations.
+    runs {
+        client {
+            workingDirectory project.file('runClient')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+			property 'forge.logging.console.level', 'debug'
+
+            mods {
+                pixelmoninformation {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('runServer')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                pixelmoninformation {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+repositories {  
+    maven {
+    	name = "Progwml6 maven (jei main)"
+    	url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+    	name = "ModMaven (jei fallback)"
+    	url = "https://modmaven.dev"
+    }
+
+    maven { 
+        name = "TehNut's Maven (hwyla)"
+        url "https://maven.tehnut.info/" 
+    }
+    
+    maven {
+        name 'tterrag maven (the one probe)'
+        url "https://maven.tterrag.com/"
+    }
+
+    ivy {
+        setUrl('https://download.nodecdn.net/containers/reforged/server/release')
+        metadataSources {
+            artifact()
+        }
+        patternLayout {
+            artifact('[revision]/[artifact].[ext]')
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+    
+	compileOnly fg.deobf("mezz.jei:jei-1.16.5:${project.jei_version}:api")
+	runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:${project.jei_version}")   
+	 
+    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${project.hwyla_version}:api")
+    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${project.hwyla_version}")
+
+	compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${project.top_version}:api")
+	runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${project.top_version}")
+    
+	implementation fg.deobf('pixelmon:Pixelmon-1.16.5-9.0.0-server:9.0.0')
+}
+
+processResources {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+	
+	// This will ensure that this task is redone when the versions change.
+	inputs.property 'version', project.version
+ 
+	// Replace stuff in mods.toml, nothing else
+	from(sourceSets.main.resources.srcDirs) {
+		include 'META-INF/mods.toml'
+ 		expand 'mod_version': project.mod_version, 'forge_version': project.forge_version, 'pixelmon_version': pixelmon_version, 'jei_version': jei_version, 'hwyla_version': hwyla_version, 'top_version': top_version
+	}
+ 
+	// Copy everything else except the mods.toml
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'META-INF/mods.toml'
+	}
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": project.mod_name,
+            "Specification-Vendor": project.mod_vendor,
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.mod_name,
+            "Implementation-Version": project.mod_version,
+            "Implementation-Vendor" : project.mod_vendor,
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            'Built-On-Java': "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
+            'Built-On': "${forge_version}"
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar') 
+
+task deobfJar(type: Jar) {
+    dependsOn(processResources)
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+task sourcesJar(type: Jar) {
+    dependsOn(classes)
+    dependsOn(processResources)
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+tasks.build.dependsOn deobfJar, sourcesJar
