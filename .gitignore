@@ -81,14 +81,7 @@ local.properties
 *Thumbs.db
 .pmd
 
+libs/
 run/
 runClient/
 runServer/
-
-src/6.3.4/libs/Pixelmon-*.jar
-src/7.0.0/libs/Pixelmon-*.jar
-src/7.1.0/libs/Pixelmon-*.jar
-src/7.2.0/libs/Pixelmon-*.jar
-src/7.3.0/libs/Pixelmon-*.jar
-src/8.0.0/libs/Pixelmon-*.jar
-src/Main/libs/Pixelmon-*.jar
