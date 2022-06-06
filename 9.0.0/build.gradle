@@ -75,7 +75,11 @@ repositories {
         name 'tterrag maven (the one probe)'
         url "https://maven.tterrag.com/"
     }
-
+    
+    flatDir {
+        dir 'libs/'
+    }
+/*
     ivy {
         setUrl('https://download.nodecdn.net/containers/reforged/server/release')
         metadataSources {
@@ -85,6 +89,7 @@ repositories {
             artifact('[revision]/[artifact].[ext]')
         }
     }
+*/
 }
 
 dependencies {
@@ -99,7 +104,8 @@ dependencies {
 	compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${project.top_version}:api")
 	runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${project.top_version}")
     
-	implementation fg.deobf('pixelmon:Pixelmon-1.16.5-9.0.0-server:9.0.0')
+	//implementation fg.deobf('pixelmon:Pixelmon-1.16.5-9.0.0-server:9.0.0')
+	implementation fg.deobf("com.pixelmonmod:Pixelmon-1.16.5:9.0.0-universal")
 }
 
 processResources {
