@@ -1,63 +1,50 @@
 package bletch.pixelmoninformation;
 
-import net.minecraft.block.Block;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.loading.FMLPaths;
+import bletch.pixelmoninformation.core.ModClientProxy;
+import bletch.pixelmoninformation.core.ModCommonConfig;
+import bletch.pixelmoninformation.core.ModCommonProxy;
+import bletch.pixelmoninformation.core.ModClientConfig;
+import bletch.pixelmoninformation.core.ModDetails;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod("pixelmoninformation")
+@Mod(ModDetails.MOD_ID)
 public class PixelmonInformation
 {
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+	public static ModCommonProxy proxy;
 
-    public PixelmonInformation() {
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+	public PixelmonInformation() {    	
+		if (FMLEnvironment.dist == Dist.CLIENT) {            
+			proxy = new ModClientProxy();
+		} else {
+			proxy = new ModCommonProxy();
+		}
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
-    private void setup(final FMLCommonSetupEvent event) {
-    }
+		// Register ourselves for server and other game events we are interested in
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-    }
+	private void commonSetup(final FMLCommonSetupEvent event) {
+		ModCommonConfig.initialize(FMLPaths.CONFIGDIR.get().resolve(ModDetails.MOD_ID + "-common.toml"));
 
-    private void enqueueIMC(final InterModEnqueueEvent event) {
-    }
+		proxy.registerWaila();
+		proxy.registerTheOneProbe();
+	}
 
-    private void processIMC(final InterModProcessEvent event) {
-    }
-    
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
-    }
+	private void clientSetup(final FMLClientSetupEvent event) {
+		ModClientConfig.initialize(FMLPaths.CONFIGDIR.get().resolve(ModDetails.MOD_ID + "-client.toml"));
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-        }
-    }
+		proxy.registerTooltips();
+
+		//LootHelper.initialize();
+	}
 }
