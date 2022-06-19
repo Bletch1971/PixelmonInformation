@@ -64,6 +64,10 @@ public class PixelmonEntityTop {
 			probe = theOneProbe;
 			config = probe.createProbeConfig();
 			
+			if (WrappedTextElement.ELEMENT_ID == -1) {
+				WrappedTextElement.ELEMENT_ID = probe.registerElementFactory(new WrappedTextElement.Factory());
+			}
+			
 			probe.registerEntityProvider(new IProbeInfoEntityProvider() {
 				
 				@Override

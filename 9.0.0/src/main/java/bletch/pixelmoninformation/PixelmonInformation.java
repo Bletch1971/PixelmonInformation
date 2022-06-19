@@ -15,8 +15,6 @@ import bletch.pixelmoninformation.core.ModDetails;
 import bletch.pixelmoninformation.tooltips.PixelmonItemTooltip;
 import bletch.pixelmoninformation.top.PixelmonBlockTop;
 import bletch.pixelmoninformation.top.PixelmonEntityTop;
-import bletch.pixelmoninformation.top.WrappedTextElement;
-import mcjty.theoneprobe.TheOneProbe;
 
 @Mod(ModDetails.MOD_ID)
 public class PixelmonInformation
@@ -34,10 +32,6 @@ public class PixelmonInformation
 
 	private void commonSetup(final FMLCommonSetupEvent event) {
 		ModCommonConfig.initialize(FMLPaths.CONFIGDIR.get().resolve(ModDetails.MOD_ID + "-common.toml"));
-		
-		if (ModList.get().isLoaded(ModDetails.MOD_ID_TOP) && ModCommonConfig.instance.enableTopIntegration()) {
-			WrappedTextElement.ELEMENT_ID = TheOneProbe.theOneProbeImp.registerElementFactory(new WrappedTextElement.Factory());
-		}
 	}
 
 	private void clientSetup(final FMLClientSetupEvent event) {

@@ -3,10 +3,11 @@ package bletch.pixelmoninformation.top;
 import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+
 import bletch.pixelmoninformation.utils.StringUtils;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.api.IElementFactory;
-import mcjty.theoneprobe.rendering.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 
@@ -57,7 +58,7 @@ public class WrappedTextElement implements IElement {
 		int lineY = y;
 		
 		for (String line : this.textLines) {
-			RenderHelper.renderText(minecraft, matrixStack, x, lineY, line);
+			renderText(minecraft, matrixStack, x, lineY, line);
 			lineY += minecraft.font.lineHeight;
 		}
 	}
@@ -91,7 +92,35 @@ public class WrappedTextElement implements IElement {
 		this.width = 0; 
 		this.height = 0;
 		this.textLines = null;
-	}
+	}    
+	
+	@SuppressWarnings("deprecation")
+	public static int renderText(Minecraft mc, MatrixStack matrixStack, int x, int y, String txt) {
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0f);
+
+        matrixStack.pushPose();
+        matrixStack.translate(0.0F, 0.0F, 32.0F);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.enableRescaleNormal();
+        RenderSystem.enableLighting();
+        net.minecraft.client.renderer.RenderHelper.setupFor3DItems();
+
+        RenderSystem.disableLighting();
+        RenderSystem.disableDepthTest();
+        RenderSystem.disableBlend();
+        int width = mc.font.width(txt);
+        mc.font.drawShadow(matrixStack, txt, x, y, 16777215);
+        RenderSystem.enableLighting();
+        RenderSystem.enableDepthTest();
+        // Fixes opaque cooldown overlay a bit lower
+        RenderSystem.enableBlend();
+
+        matrixStack.popPose();
+        RenderSystem.disableRescaleNormal();
+        RenderSystem.disableLighting();
+
+        return width;
+    }
 
     public static class Factory implements IElementFactory {
 

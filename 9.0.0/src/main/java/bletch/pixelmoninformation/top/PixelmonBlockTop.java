@@ -29,6 +29,10 @@ public class PixelmonBlockTop {
 		public Void apply(ITheOneProbe theOneProbe) {
 			probe = theOneProbe;
 			
+			if (WrappedTextElement.ELEMENT_ID == -1) {
+				WrappedTextElement.ELEMENT_ID = probe.registerElementFactory(new WrappedTextElement.Factory());
+			}
+			
 			probe.registerProvider(new IProbeInfoProvider() {
 
 				@Override
