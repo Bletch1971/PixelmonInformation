@@ -4,6 +4,7 @@ license="All rights reserved"
 
 displayURL="https://github.com/Bletch1971/PixelmonInformation"
 issueTrackerURL="https://github.com/Bletch1971/PixelmonInformation/issues"
+updateJSONURL="https://raw.githubusercontent.com/Bletch1971/PixelmonInformation/master/9.0/updateforge.json"
 
 [[mods]]
 modId="pixelmoninformation"
