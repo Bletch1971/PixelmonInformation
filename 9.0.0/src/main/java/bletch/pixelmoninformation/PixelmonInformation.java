@@ -35,7 +35,9 @@ public class PixelmonInformation
 	private void commonSetup(final FMLCommonSetupEvent event) {
 		ModCommonConfig.initialize(FMLPaths.CONFIGDIR.get().resolve(ModDetails.MOD_ID + "-common.toml"));
 		
-		WrappedTextElement.ELEMENT_ID = TheOneProbe.theOneProbeImp.registerElementFactory(new WrappedTextElement.Factory());
+		if (ModList.get().isLoaded(ModDetails.MOD_ID_TOP) && ModCommonConfig.instance.enableTopIntegration()) {
+			WrappedTextElement.ELEMENT_ID = TheOneProbe.theOneProbeImp.registerElementFactory(new WrappedTextElement.Factory());
+		}
 	}
 
 	private void clientSetup(final FMLClientSetupEvent event) {

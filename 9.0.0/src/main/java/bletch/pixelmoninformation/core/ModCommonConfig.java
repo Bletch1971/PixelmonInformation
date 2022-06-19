@@ -23,7 +23,7 @@ public class ModCommonConfig {
 	private final ForgeConfigSpec.BooleanValue wailaShowBlockInformation;
 	private final ForgeConfigSpec.BooleanValue wailaBlocksShowTooltip;
 	private final ForgeConfigSpec.BooleanValue wailaBlocksShowInformation;
-	private final ForgeConfigSpec.BooleanValue wailaBlocksShowGrowthStages;
+	//private final ForgeConfigSpec.BooleanValue wailaBlocksShowGrowthStages;
 	private final ForgeConfigSpec.BooleanValue wailaShowEntityInformation;
 	private final ForgeConfigSpec.BooleanValue wailaEntityShowPokemonDescription;
 	private final ForgeConfigSpec.BooleanValue wailaEntityShowPokemonOwner;
@@ -43,7 +43,7 @@ public class ModCommonConfig {
 	private final ForgeConfigSpec.BooleanValue topShowBlockInformation;
 	private final ForgeConfigSpec.BooleanValue topBlocksShowTooltip;
 	private final ForgeConfigSpec.BooleanValue topBlocksShowInformation;
-	private final ForgeConfigSpec.BooleanValue topBlocksShowGrowthStages;
+	//private final ForgeConfigSpec.BooleanValue topBlocksShowGrowthStages;
 	private final ForgeConfigSpec.BooleanValue topShowEntityInformation;
 	private final ForgeConfigSpec.BooleanValue topEntityShowPokemonDescription;
 	private final ForgeConfigSpec.BooleanValue topEntityShowPokemonOwner;
@@ -75,7 +75,7 @@ public class ModCommonConfig {
 
 	private ModCommonConfig() {
 
-		BUILDER.push("tooltips");
+		BUILDER.push("jei");
 		{
 			BUILDER.comment("If true, will integrate with JEI.");
 			enableJeiIntegration = BUILDER.define("enableJeiIntegration", true);
@@ -97,8 +97,8 @@ public class ModCommonConfig {
 				wailaBlocksShowTooltip = BUILDER.define("wailaBlocksShowTooltip", true);
 				BUILDER.comment("If true, will show the block information in Waila.");
 				wailaBlocksShowInformation = BUILDER.define("wailaBlocksShowInformation", true);
-				BUILDER.comment("If true, will show any growth stages.");
-				wailaBlocksShowGrowthStages = BUILDER.define("wailaBlocksShowGrowthStages", true);
+//				BUILDER.comment("If true, will show any growth stages.");
+//				wailaBlocksShowGrowthStages = BUILDER.define("wailaBlocksShowGrowthStages", true);
 			}
 			BUILDER.pop();
 			
@@ -142,7 +142,7 @@ public class ModCommonConfig {
 			BUILDER.comment("If true, will integrate with The One Probe.");
 			enableTopIntegration = BUILDER.define("enableTopIntegration", true);
 			BUILDER.comment("If true, will only show information when crouching.");
-			topUseCrouchKey = BUILDER.define("topUseCrouchKey", false);
+			topUseCrouchKey = BUILDER.define("topUseCrouchKey", true);
 			
 			BUILDER.push("blocks");
 			{
@@ -152,8 +152,8 @@ public class ModCommonConfig {
 				topBlocksShowTooltip = BUILDER.define("topBlocksShowTooltip", true);
 				BUILDER.comment("If true, will show the block information in The One Probe.");
 				topBlocksShowInformation = BUILDER.define("topBlocksShowInformation", true);
-				BUILDER.comment("If true, will show any growth stages.");
-				topBlocksShowGrowthStages = BUILDER.define("topBlocksShowGrowthStages", true);
+//				BUILDER.comment("If true, will show any growth stages.");
+//				topBlocksShowGrowthStages = BUILDER.define("topBlocksShowGrowthStages", true);
 			}
 			BUILDER.pop();
 			
@@ -217,9 +217,9 @@ public class ModCommonConfig {
 	public boolean wailaBlocksShowInformation() {
 		return this.wailaBlocksShowInformation.get();
 	}
-	public boolean wailaBlocksShowGrowthStages() {
-		return this.wailaBlocksShowGrowthStages.get();
-	}
+//	public boolean wailaBlocksShowGrowthStages() {
+//		return this.wailaBlocksShowGrowthStages.get();
+//	}
 	public boolean wailaShowEntityInformation() {
 		return this.wailaShowEntityInformation.get();
 	}
@@ -275,9 +275,9 @@ public class ModCommonConfig {
 	public boolean topBlocksShowInformation() {
 		return this.topBlocksShowInformation.get();
 	}
-	public boolean topBlocksShowGrowthStages() {
-		return this.topBlocksShowGrowthStages.get();
-	}
+//	public boolean topBlocksShowGrowthStages() {
+//		return this.topBlocksShowGrowthStages.get();
+//	}
 	public boolean topShowEntityInformation() {
 		return this.topShowEntityInformation.get();
 	}
