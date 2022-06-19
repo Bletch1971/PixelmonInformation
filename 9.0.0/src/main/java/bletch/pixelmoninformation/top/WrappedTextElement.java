@@ -6,11 +6,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import bletch.pixelmoninformation.utils.StringUtils;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.api.IElementFactory;
-import mcjty.theoneprobe.apiimpl.client.ElementTextRender;
 import mcjty.theoneprobe.rendering.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.StringTextComponent;
 
 public class WrappedTextElement implements IElement {
 
