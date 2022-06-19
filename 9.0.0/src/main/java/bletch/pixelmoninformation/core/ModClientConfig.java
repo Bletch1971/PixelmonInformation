@@ -16,9 +16,9 @@ public class ModClientConfig {
 
 	private final ForgeConfigSpec configSpec;
 	private final ForgeConfigSpec.BooleanValue enableTooltipIntegration;
-	private final ForgeConfigSpec.BooleanValue restrictToAdvancedTooltips;
-	private final ForgeConfigSpec.BooleanValue useSneakKey;
-	private final ForgeConfigSpec.BooleanValue showSneakKeyInfo;
+	private final ForgeConfigSpec.BooleanValue tooltipsRestrictToAdvanced;
+	private final ForgeConfigSpec.BooleanValue tooltipsUseCrouchKey;
+	private final ForgeConfigSpec.BooleanValue tooltipsShowCrouchKeyInfo;
 
 	public static void initialize(Path file) {
 		final CommentedFileConfig configData = CommentedFileConfig.builder(file)
@@ -42,13 +42,13 @@ public class ModClientConfig {
 			enableTooltipIntegration = BUILDER.define("enableTooltipIntegration", true);
 
 			BUILDER.comment("If true, the item translation key will be show in the tooltip.");
-			restrictToAdvancedTooltips = BUILDER.define("restrictToAdvancedTooltips", false);
+			tooltipsRestrictToAdvanced = BUILDER.define("tooltipsRestrictToAdvanced", false);
 
-			BUILDER.comment("If true, will only show tooltip information when sneak key pressed.");
-			useSneakKey = BUILDER.define("useSneakKey", true);
+			BUILDER.comment("If true, will only show tooltip information when crouch key pressed.");
+			tooltipsUseCrouchKey = BUILDER.define("tooltipsUseCrouchKey", true);
 
-			BUILDER.comment("If true, will show the hold sneak key for more information.");
-			showSneakKeyInfo = BUILDER.define("showSneakKeyInfo", true);
+			BUILDER.comment("If true, will show the hold crouch key for more information.");
+			tooltipsShowCrouchKeyInfo = BUILDER.define("tooltipsShowCrouchKeyInfo", true);
 		}
 		BUILDER.pop();
 
@@ -59,15 +59,15 @@ public class ModClientConfig {
 		return this.enableTooltipIntegration.get();
 	}
 
-	public boolean restrictToAdvancedTooltips() {
-		return this.restrictToAdvancedTooltips.get();
+	public boolean tooltipsRestrictToAdvanced() {
+		return this.tooltipsRestrictToAdvanced.get();
 	}
 
-	public boolean useSneakKey() {
-		return this.useSneakKey.get();
+	public boolean tooltipsUseCrouchKey() {
+		return this.tooltipsUseCrouchKey.get();
 	}
 
-	public boolean showSneakKeyInfo() {
-		return this.showSneakKeyInfo.get();
+	public boolean tooltipsShowCrouchKeyInfo() {
+		return this.tooltipsShowCrouchKeyInfo.get();
 	}
 }
