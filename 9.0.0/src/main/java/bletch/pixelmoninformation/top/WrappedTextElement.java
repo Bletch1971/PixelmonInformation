@@ -7,6 +7,7 @@ import bletch.pixelmoninformation.utils.StringUtils;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.api.IElementFactory;
 import mcjty.theoneprobe.apiimpl.client.ElementTextRender;
+import mcjty.theoneprobe.rendering.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.StringTextComponent;
@@ -58,7 +59,7 @@ public class WrappedTextElement implements IElement {
 		int lineY = y;
 		
 		for (String line : this.textLines) {
-			ElementTextRender.render(new StringTextComponent(line), matrixStack, x, lineY, false);
+			RenderHelper.renderText(minecraft, matrixStack, x, lineY, line);
 			lineY += minecraft.font.lineHeight;
 		}
 	}
