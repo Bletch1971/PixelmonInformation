@@ -7,7 +7,7 @@ if "%DIRNAME%" == "" set DIRNAME=.
 
 cd /d "%DIRNAME%"
 
-call gradlew.bat wrapper --gradle-version=4.10.3
+call gradlew.bat wrapper --gradle-version=7.3.3
 
 cd /d "%WORKDIR%"
 
