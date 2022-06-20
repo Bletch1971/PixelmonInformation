@@ -489,7 +489,6 @@ public class PixelmonEntityTop {
 
 			if (entity instanceof NPCNurseJoy) {
 				NPCNurseJoy entityNPC = (NPCNurseJoy)entity;
-				//npcName = entityNPC.getDisplayText();
 				
 				String nameKey = entityNPC.getTextureIndex() == 1 ? "gui.nursejoy.name" : "gui.doctorjohn.name";
 				npcName = new TranslationTextComponent(nameKey).getString();
