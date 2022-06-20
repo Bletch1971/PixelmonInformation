@@ -15,7 +15,7 @@ public class ModCommonConfig {
 	public static final ModCommonConfig instance = new ModCommonConfig();
 
 	private final ForgeConfigSpec configSpec;
-	private final ForgeConfigSpec.BooleanValue enableJeiIntegration;
+	//private final ForgeConfigSpec.BooleanValue enableJeiIntegration;
 	private final ForgeConfigSpec.BooleanValue enableWailaIntegration;
 	private final ForgeConfigSpec.BooleanValue enableTopIntegration;
 	
@@ -75,12 +75,12 @@ public class ModCommonConfig {
 
 	private ModCommonConfig() {
 
-		BUILDER.push("jei");
-		{
-			BUILDER.comment("If true, will integrate with JEI.");
-			enableJeiIntegration = BUILDER.define("enableJeiIntegration", true);
-		}
-		BUILDER.pop();
+//		BUILDER.push("jei");
+//		{
+//			BUILDER.comment("If true, will integrate with JEI.");
+//			enableJeiIntegration = BUILDER.define("enableJeiIntegration", true);
+//		}
+//		BUILDER.pop();
 
 		BUILDER.push("waila");
 		{
@@ -195,9 +195,9 @@ public class ModCommonConfig {
 		this.configSpec = BUILDER.build();
 	}
 
-	public boolean enableJeiIntegration() {
-		return this.enableJeiIntegration.get();
-	}
+//	public boolean enableJeiIntegration() {
+//		return this.enableJeiIntegration.get();
+//	}
 	public boolean enableWailaIntegration() {
 		return this.enableWailaIntegration.get();
 	}
