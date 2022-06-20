@@ -1,6 +1,7 @@
 package bletch.pixelmoninformation.top;
 
 import com.google.common.base.Function;
+import com.pixelmonmod.pixelmon.api.pokedex.PlayerPokedex;
 import com.pixelmonmod.pixelmon.api.pokemon.Element;
 import com.pixelmonmod.pixelmon.api.pokemon.Nature;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
@@ -12,7 +13,6 @@ import com.pixelmonmod.pixelmon.api.pokemon.species.evs.EVYields;
 import com.pixelmonmod.pixelmon.api.pokemon.stats.BattleStatsType;
 import com.pixelmonmod.pixelmon.api.pokemon.stats.EVStore;
 import com.pixelmonmod.pixelmon.api.pokemon.stats.IVStore;
-import com.pixelmonmod.pixelmon.client.storage.ClientPlayerPokedex;
 import com.pixelmonmod.pixelmon.entities.npcs.IndexedNPCEntity;
 import com.pixelmonmod.pixelmon.entities.npcs.NPCChatting;
 import com.pixelmonmod.pixelmon.entities.npcs.NPCEntity;
@@ -30,7 +30,6 @@ import com.pixelmonmod.pixelmon.enums.EnumGrowth;
 import bletch.pixelmoninformation.core.ModCommonConfig;
 import bletch.pixelmoninformation.core.ModDetails;
 import bletch.pixelmoninformation.utils.ModUtils;
-import bletch.pixelmoninformation.utils.PixelmonUtils;
 import bletch.pixelmoninformation.utils.StringUtils;
 import bletch.pixelmoninformation.utils.TextUtils;
 import mcjty.theoneprobe.api.CompoundText;
@@ -48,7 +47,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-
 import static mcjty.theoneprobe.api.TextStyleClass.MODNAME;
 
 public class PixelmonEntityTop {
@@ -360,14 +358,8 @@ public class PixelmonEntityTop {
 				if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 					String caughtStatus = TextUtils.SYMBOL_UNKNOWN;
 					
-					ClientPlayerPokedex pokedex = null;
-					try {
-						pokedex = PixelmonUtils.getClientPokedex();
-					}
-					catch (Exception e) {
-						pokedex = null;
-					}
-				
+					PlayerPokedex pokedex = new PlayerPokedex(player.getUUID());
+
 					if (pokedex != null) {
 						caughtStatus = pokedex.hasCaught(pokemonSpecies) ? TextUtils.SYMBOL_GREENTICK : TextUtils.SYMBOL_REDCROSS;
 					}
