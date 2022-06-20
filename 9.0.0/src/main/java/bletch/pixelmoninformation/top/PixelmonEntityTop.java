@@ -41,7 +41,6 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoEntityProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -109,8 +108,8 @@ public class PixelmonEntityTop {
 		private static boolean addPixelmonEntityInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, PixelmonEntity entity, IProbeHitEntityData data) {
 			if (entity == null)
 				return false;
-
-			if (ModCommonConfig.instance.topUseCrouchKey() && mode == ProbeMode.NORMAL) {
+			
+			if (ModCommonConfig.instance.topUseCrouchKey() && !player.isCrouching()) {
 				return false;
 			}	
 			
@@ -132,7 +131,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.owner";
 		        String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (pixelmon.hasOwner() && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        if (pixelmon.hasOwner() && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 					String ownerName = pixelmon.getOwner().getName().getString();
 					
 					probeInfo.text(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + ownerName));
@@ -143,7 +142,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.level";
 			    String output = new TranslationTextComponent(translateKey).getString();
 			    
-			    if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+			    if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 			    	int level = pixelmon.getLvl().getPokemonLevel();
 			    	
 			    	probeInfo.text(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + level));
@@ -155,7 +154,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.dexnum";
 		        String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (pokemonSpecies != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        if (pokemonSpecies != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        	String dexNumber = pokemonSpecies.getFormattedDex();
 		        	
 		        	probeInfo.text(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + dexNumber));
@@ -167,7 +166,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.generation";
 		        String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (pokemonSpecies != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        if (pokemonSpecies != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        	int generation = pokemonSpecies.getGeneration();
 		        	
 		        	probeInfo.text(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + generation));
@@ -179,7 +178,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.evstats";
 		        String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        if (pokemon != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        	String evStats = "";
 			        String delimiter = "";
 	        		
@@ -211,7 +210,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.ivstats";
 		        String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        if (pokemon != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        	String ivStats = "";
 			        String delimiter = "";
 			        
@@ -242,8 +241,8 @@ public class PixelmonEntityTop {
 				// show the EV Yield 
 				String translateKey = "gui.pokemon.evyield";
 				String output = new TranslationTextComponent(translateKey).getString();
-
-		        if (stats != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+				
+		        if (stats != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        	String evYield = "";
 			        String delimiter = "";
 			        
@@ -271,7 +270,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.nature";
 				String output = new TranslationTextComponent(translateKey).getString();
 				
-				if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+				if (pokemon != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 			        String natureName = "";
 					
 					Nature nature = pokemon.getNature();
@@ -289,7 +288,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.growth";
 		        String output = new TranslationTextComponent(translateKey).getString();
 
-				if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+				if (pokemon != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 			        String growthName = "";
 			        
 					EnumGrowth growth = pokemon.getGrowth();
@@ -307,7 +306,7 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.type";
 		        String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (stats != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {	
+		        if (stats != null && !StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {	
 			        String types = "";
 			        String delimiter = "";
 			        
@@ -334,19 +333,19 @@ public class PixelmonEntityTop {
 			        	
 						translateKey = "pokemontype." + typeValue + ".strong";
 		        		output = new TranslationTextComponent(translateKey).getString();
-		        		if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        		if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        			probeInfo.text(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
 		        		}
 		        		
 						translateKey = "pokemontype." + typeValue + ".weak";
 		        		output = new TranslationTextComponent(translateKey).getString();
-		        		if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        		if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        			probeInfo.text(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
 		        		}
 
 						translateKey = "pokemontype." + typeValue + ".bad";
 		        		output = new TranslationTextComponent(translateKey).getString();
-		        		if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        		if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        			probeInfo.text(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
 		        		}
 			        }
@@ -358,10 +357,16 @@ public class PixelmonEntityTop {
 				String translateKey = "gui.pokemon.caught";
 				String output = new TranslationTextComponent(translateKey).getString();
 				
-				if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+				if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 					String caughtStatus = TextUtils.SYMBOL_UNKNOWN;
 					
-					ClientPlayerPokedex pokedex = PixelmonUtils.getClientPokedex();
+					ClientPlayerPokedex pokedex = null;
+					try {
+						pokedex = PixelmonUtils.getClientPokedex();
+					}
+					catch (Exception e) {
+						pokedex = null;
+					}
 				
 					if (pokedex != null) {
 						caughtStatus = pokedex.hasCaught(pokemonSpecies) ? TextUtils.SYMBOL_GREENTICK : TextUtils.SYMBOL_REDCROSS;

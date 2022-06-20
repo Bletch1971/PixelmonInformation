@@ -13,7 +13,6 @@ import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -45,7 +44,7 @@ public class PixelmonBlockTop {
 					Block block = state.getBlock();
 					
 					if (block.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
-						PixelmonBlockTop.getTheOneProbe.addProbeInfo(mode, probeInfo, player, world, state, data);
+						PixelmonBlockTop.getTheOneProbe.addPixelmonBlockInfo(mode, probeInfo, player, world, state, data);
 					}	
 				}
 
@@ -55,7 +54,7 @@ public class PixelmonBlockTop {
 				Block block = state.getBlock();
 				
 				if (block.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
-					return PixelmonBlockTop.getTheOneProbe.overrideStandardInfo(mode, probeInfo, player, world, state, data);
+					return PixelmonBlockTop.getTheOneProbe.overridePixelmonBlockInfo(mode, probeInfo, player, world, state, data);
 				}
 				
 				return false;
@@ -64,8 +63,9 @@ public class PixelmonBlockTop {
 			return null;
 		}
 		
-		private static boolean addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
-			if (ModCommonConfig.instance.topUseCrouchKey() && mode == ProbeMode.NORMAL) {
+		private static boolean addPixelmonBlockInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
+			
+			if (ModCommonConfig.instance.topUseCrouchKey() && !player.isCrouching()) {
 				return false;
 			}
 			
@@ -80,7 +80,7 @@ public class PixelmonBlockTop {
 				String translateKey = registryName.getPath() + PixelmonUtils.TOOLTIP_SUFFIX;			
 				String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 		        	probeInfo.element(new WrappedTextElement(output));
 		        }
 			}
@@ -89,7 +89,7 @@ public class PixelmonBlockTop {
 				String translateKey = registryName.getPath() + PixelmonUtils.INFORMATION_SUFFIX;			
 				String output = new TranslationTextComponent(translateKey).getString();
 		        
-		        if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+		        if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
 	        		probeInfo.element(new WrappedTextElement(output));
 		        }
 			}
@@ -107,7 +107,7 @@ public class PixelmonBlockTop {
 			return true;
 		}
 		
-		private static boolean overrideStandardInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
+		private static boolean overridePixelmonBlockInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
 			return false;
 		}
 	}
