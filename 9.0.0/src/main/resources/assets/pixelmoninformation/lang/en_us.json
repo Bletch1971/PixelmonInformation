@@ -173,7 +173,7 @@
     "love_ball.pinformation": "A Love Ball is a Poké Ball that has an 8× catch rate on Pokémon of both the same species and opposite gender as the player's Pokémon.",
     "lure_ball.pinformation": "A Lure Ball is a type of Poké Ball that has a 3× catch rate on Pokémon encountered by fishing.",
     "luxury_ball.pinformation": "A Luxury Ball is a comfortable Poké Ball that makes a caught wild Pokémon quickly grow friendly.\nA Luxury Ball grants an extra +1 happiness to the multiple ways of obtaining happiness, although it does not affect events that lower happiness. The effects of the Luxury Ball stack with the effects of a Soothe Bell.",
-    "master_ball.pinformation": "The Master Ball is a type of Poké Ball that will always catch the Pokémon it is used on (unless the Pokémon cannot be caught, like a boss Pokémon or another trainer's Pokémon). Unlike all other Poké Balls, Master Balls have no chance of breaking if thrown against a block.",
+    "master_ball.pinformation": "The Master Ball is a type of Poké Ball that will always catch the Pokémon it is used on (unless the Pokémon cannot be caught, like a boss Pokémon or another trainer's Pokémon).",
     "moon_ball.pinformation": "A Moon Ball has a 4x catch rate on Pokémon that evolve with a Moon Stone or belong to evolutionary families of the former.",
     "nest_ball.pinformation": "A Nest Ball is a somewhat different Poké Ball that works especially well on weaker Pokémon in the wild. The Nest Ball's catch rate is based on the formula:§a(41-Pokémon's level) / 10§r, with a minimum catch rate of 1×.",
     "net_ball.pinformation": "A Net Ball is a somewhat different Poké Ball that has a 3× catch rate on Water and Bug-type Pokémon.",
