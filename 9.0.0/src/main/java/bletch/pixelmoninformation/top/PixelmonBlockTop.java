@@ -6,6 +6,7 @@ import bletch.pixelmoninformation.core.ModCommonConfig;
 import bletch.pixelmoninformation.core.ModDetails;
 import bletch.pixelmoninformation.utils.PixelmonUtils;
 import bletch.pixelmoninformation.utils.StringUtils;
+import mcjty.theoneprobe.api.IProbeConfig;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.IProbeInfoProvider;
@@ -22,17 +23,19 @@ public class PixelmonBlockTop {
 
 	public static class getTheOneProbe implements Function<ITheOneProbe, Void> {
 
-		public static ITheOneProbe probe;
+		public static ITheOneProbe PROBE;
+		public static IProbeConfig CONFIG;
 
 		@Override
 		public Void apply(ITheOneProbe theOneProbe) {
-			probe = theOneProbe;
+			PROBE = theOneProbe;
+			CONFIG = PROBE.createProbeConfig();
 
 			if (WrappedTextElement.ELEMENT_ID == -1) {
-				WrappedTextElement.ELEMENT_ID = probe.registerElementFactory(new WrappedTextElement.Factory());
+				WrappedTextElement.ELEMENT_ID = PROBE.registerElementFactory(new WrappedTextElement.Factory());
 			}
 
-			probe.registerProvider(new IProbeInfoProvider() {
+			PROBE.registerProvider(new IProbeInfoProvider() {
 
 				@Override
 				public String getID() {
@@ -50,7 +53,7 @@ public class PixelmonBlockTop {
 
 			});
 
-			probe.registerBlockDisplayOverride((mode, probeInfo, player, world, state, data) -> {
+			PROBE.registerBlockDisplayOverride((mode, probeInfo, player, world, state, data) -> {
 				Block block = state.getBlock();
 
 				if (block.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
@@ -64,8 +67,8 @@ public class PixelmonBlockTop {
 		}
 
 		private static boolean addPixelmonBlockInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
-
-			if (ModCommonConfig.instance.topUseCrouchKey() && !player.isCrouching()) {
+			if (!ModCommonConfig.INSTANCE.topShowBlockInformation() 
+					|| ModCommonConfig.INSTANCE.topUseCrouchKey() && !player.isCrouching()) {
 				return false;
 			}
 
@@ -76,7 +79,7 @@ public class PixelmonBlockTop {
 				return false;
 			}
 
-			if (ModCommonConfig.instance.wailaBlocksShowTooltip()) {
+			if (ModCommonConfig.INSTANCE.wailaBlocksShowTooltip()) {
 				String translateKey = registryName.getPath() + PixelmonUtils.TOOLTIP_SUFFIX;			
 				String output = new TranslationTextComponent(translateKey).getString();
 
@@ -85,7 +88,7 @@ public class PixelmonBlockTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaBlocksShowInformation()) {
+			if (ModCommonConfig.INSTANCE.wailaBlocksShowInformation()) {
 				String translateKey = registryName.getPath() + PixelmonUtils.INFORMATION_SUFFIX;			
 				String output = new TranslationTextComponent(translateKey).getString();
 
@@ -94,15 +97,15 @@ public class PixelmonBlockTop {
 				}
 			}
 
-			//			if (block instanceof ApricornLeavesBlock && ModCommonConfig.instance.topBlocksShowGrowthStages()) {
-			//				ApricornLeavesBlock leavesBlock = ((ApricornLeavesBlock)block);
-			//				
-			//			}
+//			if (block instanceof ApricornLeavesBlock && ModCommonConfig.INSTANCE.topBlocksShowGrowthStages()) {
+//				ApricornLeavesBlock leavesBlock = ((ApricornLeavesBlock)block);
+//				
+//			}
 
-			//			if (block instanceof BerryLeavesBlock && ModCommonConfig.instance.topBlocksShowGrowthStages()) {
-			//				BerryLeavesBlock leavesBlock = ((BerryLeavesBlock)block);
-			//				
-			//			}
+//			if (block instanceof BerryLeavesBlock && ModCommonConfig.INSTANCE.topBlocksShowGrowthStages()) {
+//				BerryLeavesBlock leavesBlock = ((BerryLeavesBlock)block);
+//				
+//			}
 
 			return true;
 		}

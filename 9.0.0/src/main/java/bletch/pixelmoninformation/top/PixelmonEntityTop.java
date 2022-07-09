@@ -53,19 +53,19 @@ public class PixelmonEntityTop {
 
 	public static class getTheOneProbe implements Function<ITheOneProbe, Void> {
 
-		public static ITheOneProbe probe;
-		public static IProbeConfig config;
+		public static ITheOneProbe PROBE;
+		public static IProbeConfig CONFIG;
 
 		@Override
 		public Void apply(ITheOneProbe theOneProbe) {
-			probe = theOneProbe;
-			config = probe.createProbeConfig();
+			PROBE = theOneProbe;
+			CONFIG = PROBE.createProbeConfig();
 
 			if (WrappedTextElement.ELEMENT_ID == -1) {
-				WrappedTextElement.ELEMENT_ID = probe.registerElementFactory(new WrappedTextElement.Factory());
+				WrappedTextElement.ELEMENT_ID = PROBE.registerElementFactory(new WrappedTextElement.Factory());
 			}
 
-			probe.registerEntityProvider(new IProbeInfoEntityProvider() {
+			PROBE.registerEntityProvider(new IProbeInfoEntityProvider() {
 
 				@Override
 				public String getID() {
@@ -87,14 +87,14 @@ public class PixelmonEntityTop {
 
 			});
 
-			probe.registerEntityDisplayOverride((mode, probeInfo, player, world, entity, data) -> {
+			PROBE.registerEntityDisplayOverride((mode, probeInfo, player, world, entity, data) -> {
 
 				if (entity instanceof PixelmonEntity) {
-					return PixelmonEntityTop.getTheOneProbe.overridePixelmonEntityInfo(mode, probeInfo, player, world, (PixelmonEntity)entity, data, config);
+					return PixelmonEntityTop.getTheOneProbe.overridePixelmonEntityInfo(mode, probeInfo, player, world, (PixelmonEntity)entity, data, CONFIG);
 				}
 
 				if (entity instanceof NPCEntity) {
-					return PixelmonEntityTop.getTheOneProbe.overrideNPCEntityInfo(mode, probeInfo, player, world, (NPCEntity)entity, data, config);
+					return PixelmonEntityTop.getTheOneProbe.overrideNPCEntityInfo(mode, probeInfo, player, world, (NPCEntity)entity, data, CONFIG);
 				}
 
 				return false;
@@ -104,10 +104,12 @@ public class PixelmonEntityTop {
 		}
 
 		private static boolean addPixelmonEntityInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, PixelmonEntity entity, IProbeHitEntityData data) {
-			if (entity == null)
+			if (entity == null) {
 				return false;
-
-			if (ModCommonConfig.instance.topUseCrouchKey() && !player.isCrouching()) {
+			}
+			
+			if (!ModCommonConfig.INSTANCE.topShowEntityInformation() 
+					|| ModCommonConfig.INSTANCE.topUseCrouchKey() && !player.isCrouching()) {
 				return false;
 			}	
 
@@ -116,7 +118,7 @@ public class PixelmonEntityTop {
 			Species pokemonSpecies = pixelmon.getSpecies();
 			Stats stats = pokemon.getForm();
 
-			if (ModCommonConfig.instance.topEntityShowPokemonDescription()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonDescription()) {
 				// show pokemon description
 				String output = pokemonSpecies.getDescTranslation().getString();
 
@@ -125,7 +127,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonOwner()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonOwner()) {
 				String translateKey = "gui.pokemon.owner";
 				String output = new TranslationTextComponent(translateKey).getString();
 
@@ -136,7 +138,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonLevel()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonLevel()) {
 				String translateKey = "gui.pokemon.level";
 				String output = new TranslationTextComponent(translateKey).getString();
 
@@ -147,7 +149,7 @@ public class PixelmonEntityTop {
 				}	
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonPokedexNumber()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonPokedexNumber()) {
 				// show the pokedex number
 				String translateKey = "gui.pokemon.dexnum";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -159,7 +161,7 @@ public class PixelmonEntityTop {
 				}				
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonGeneration()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonGeneration()) {
 				// show the generation
 				String translateKey = "gui.pokemon.generation";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -171,7 +173,7 @@ public class PixelmonEntityTop {
 				}
 			}		
 
-			if (ModCommonConfig.instance.topEntityShowPokemonEVs()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonEVs()) {
 				// show the EV stats 
 				String translateKey = "gui.pokemon.evstats";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -203,7 +205,7 @@ public class PixelmonEntityTop {
 				}
 			}		
 
-			if (ModCommonConfig.instance.topEntityShowPokemonIVs()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonIVs()) {
 				// show the IV stats 
 				String translateKey = "gui.pokemon.ivstats";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -235,7 +237,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonEVYield()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonEVYield()) {
 				// show the EV Yield 
 				String translateKey = "gui.pokemon.evyield";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -263,7 +265,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonNatureInformation()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonNatureInformation()) {
 				// show the nature
 				String translateKey = "gui.pokemon.nature";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -281,7 +283,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonGrowthInformation()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonGrowthInformation()) {
 				// show the type information	
 				String translateKey = "gui.pokemon.growth";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -299,7 +301,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonTypeInformation()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonTypeInformation()) {
 				// show the type information
 				String translateKey = "gui.pokemon.type";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -319,7 +321,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonTypeMatchupInformation()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonTypeMatchupInformation()) {
 				// show the type match-up information
 
 				if (stats != null) {
@@ -350,7 +352,7 @@ public class PixelmonEntityTop {
 				}
 			}
 
-			if (ModCommonConfig.instance.topEntityShowPokemonCaught()) {
+			if (ModCommonConfig.INSTANCE.topEntityShowPokemonCaught()) {
 				// show if we have caught this pixelmon
 				String translateKey = "gui.pokemon.caught";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -372,15 +374,17 @@ public class PixelmonEntityTop {
 		}
 
 		private static boolean addNPCEntityInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, NPCEntity entity, IProbeHitEntityData data) {
-			if (entity == null)
-				return false;
-
 			return false;
 		}
 
 		private static boolean overridePixelmonEntityInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, PixelmonEntity entity, IProbeHitEntityData data, IProbeConfig config) {
-			if (entity == null)
-				return false;	
+			if (entity == null) {
+				return false;
+			}	
+			
+			if (!ModCommonConfig.INSTANCE.topShowEntityInformation()) {
+				return false;
+			}
 
 			PixelmonEntity pixelmon = entity;
 			Pokemon pokemon = pixelmon.getPokemon();
@@ -468,8 +472,13 @@ public class PixelmonEntityTop {
 		}
 
 		private static boolean overrideNPCEntityInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, NPCEntity entity, IProbeHitEntityData data, IProbeConfig config) {
-			if (entity == null)
+			if (entity == null) {
 				return false;
+			}	
+			
+			if (!ModCommonConfig.INSTANCE.topShowEntityInformation()) {
+				return false;
+			}
 
 			String output = "";
 

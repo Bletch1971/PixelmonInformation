@@ -1,23 +1,31 @@
 package bletch.pixelmoninformation.core;
 
+import java.io.ByteArrayInputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import com.electronwill.nightconfig.toml.TomlFormat;
 
+import bletch.pixelmoninformation.PixelmonInformation;
+import bletch.pixelmoninformation.network.NetworkHandler;
+import bletch.pixelmoninformation.network.SyncCommonConfigPacket;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ModCommonConfig {
 
 	private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-	public static final ModCommonConfig instance = new ModCommonConfig();
+	public static final ModCommonConfig INSTANCE = new ModCommonConfig();
+	public static ForgeConfigSpec CONFIG_SPEC;
 
-	private final ForgeConfigSpec configSpec;
 	//private final ForgeConfigSpec.BooleanValue enableJeiIntegration;
-	private final ForgeConfigSpec.BooleanValue enableWailaIntegration;
-	private final ForgeConfigSpec.BooleanValue enableTopIntegration;
 
 	private final ForgeConfigSpec.BooleanValue wailaUseCrouchKey;
 	private final ForgeConfigSpec.BooleanValue wailaShowBlockInformation;
@@ -59,18 +67,44 @@ public class ModCommonConfig {
 	private final ForgeConfigSpec.BooleanValue topEntityShowPokemonTypeMatchupInformation;
 	private final ForgeConfigSpec.BooleanValue topEntityShowPokemonCaught;
 
-	public static void initialize(Path file) {
-		final CommentedFileConfig configData = CommentedFileConfig.builder(file)
+	public static void initialize() {
+		final CommentedFileConfig configData = CommentedFileConfig
+				.builder(getConfigPath())
 				.sync()
+				.preserveInsertionOrder()
 				.autosave()
 				.writingMode(WritingMode.REPLACE)
 				.build();
 
 		configData.load();
 
-		instance.configSpec.setConfig(configData);
+		CONFIG_SPEC.setConfig(configData);
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, instance.configSpec);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CONFIG_SPEC);
+	}   
+
+	public static Path getConfigPath() {
+		return FMLPaths.CONFIGDIR.get().resolve(ModDetails.MOD_ID + "-common.toml").toAbsolutePath();
+	} 
+
+	public static void sendConfig(PlayerEntity player) {
+		try {
+			final byte[] configData = Files.readAllBytes(getConfigPath());
+
+			NetworkHandler.INSTANCE.send(
+					PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) player),
+					new SyncCommonConfigPacket(configData));
+		} catch (Exception e) {
+			PixelmonInformation.LOGGER.error(ModDetails.MOD_ID + ": failed to send common config.");
+		}
+	}
+
+	public static void setConfig(final byte[] configFileData) {
+		try {
+			CONFIG_SPEC.setConfig(TomlFormat.instance().createParser().parse(new ByteArrayInputStream(configFileData)));
+		} catch (Exception e) {
+			PixelmonInformation.LOGGER.error(ModDetails.MOD_ID + ": failed to load common config.");
+		}
 	}
 
 	private ModCommonConfig() {
@@ -84,8 +118,6 @@ public class ModCommonConfig {
 
 		BUILDER.push("waila");
 		{
-			BUILDER.comment("If true, will integrate with Waila.");
-			enableWailaIntegration = BUILDER.define("enableWailaIntegration", true);
 			BUILDER.comment("If true, will only show information when crouching.");
 			wailaUseCrouchKey = BUILDER.define("wailaUseCrouchKey", false);
 
@@ -139,8 +171,6 @@ public class ModCommonConfig {
 
 		BUILDER.push("theoneprobe");
 		{
-			BUILDER.comment("If true, will integrate with The One Probe.");
-			enableTopIntegration = BUILDER.define("enableTopIntegration", true);
 			BUILDER.comment("If true, will only show information when crouching.");
 			topUseCrouchKey = BUILDER.define("topUseCrouchKey", true);
 
@@ -192,18 +222,12 @@ public class ModCommonConfig {
 		}
 		BUILDER.pop();
 
-		this.configSpec = BUILDER.build();
+		CONFIG_SPEC = BUILDER.build();
 	}
 
 //	public boolean enableJeiIntegration() {
 //		return this.enableJeiIntegration.get();
 //	}
-	public boolean enableWailaIntegration() {
-		return this.enableWailaIntegration.get();
-	}
-	public boolean enableTopIntegration() {
-		return this.enableTopIntegration.get();
-	}
 
 	public boolean wailaUseCrouchKey() {
 		return this.wailaUseCrouchKey.get();

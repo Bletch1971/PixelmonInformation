@@ -62,6 +62,10 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 
 	@Override
 	public void appendHead(List<ITextComponent> tooltip, IEntityAccessor accessor, IPluginConfig config) {
+		if (!ModCommonConfig.INSTANCE.wailaShowEntityInformation()) {
+			return;
+		}
+		
 		Entity entity = accessor.getEntity();
 		CompoundNBT data = accessor.getServerData();
 
@@ -209,11 +213,12 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 
 	@Override
 	public void appendBody(List<ITextComponent> tooltip, IEntityAccessor accessor, IPluginConfig config) {
-		Minecraft minecraft = Minecraft.getInstance();
-
-		if (ModCommonConfig.instance.wailaUseCrouchKey() && !accessor.getPlayer().isCrouching()) {
+		if (!ModCommonConfig.INSTANCE.wailaShowEntityInformation() 
+				|| ModCommonConfig.INSTANCE.wailaUseCrouchKey() && !accessor.getPlayer().isCrouching()) {
 			return;
 		}
+		
+		Minecraft minecraft = Minecraft.getInstance();
 
 		Entity entity = accessor.getEntity();		
 		CompoundNBT data = accessor.getServerData();
@@ -224,7 +229,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 			Species pokemonSpecies = pixelmon.getSpecies();
 			Stats stats = pokemon.getForm();
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonDescription()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonDescription()) {
 				// show pokemon description
 				String output = pokemonSpecies.getDescTranslation().getString();
 
@@ -236,7 +241,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonOwner()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonOwner()) {
 				String translateKey = "gui.pokemon.owner";
 				String output = new TranslationTextComponent(translateKey).getString();
 
@@ -247,7 +252,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonLevel()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonLevel()) {
 				String translateKey = "gui.pokemon.level";
 				String output = new TranslationTextComponent(translateKey).getString();
 
@@ -258,7 +263,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}	
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonPokedexNumber()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonPokedexNumber()) {
 				// show the pokedex number
 				String translateKey = "gui.pokemon.dexnum";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -270,7 +275,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}				
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonGeneration()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonGeneration()) {
 				// show the generation
 				String translateKey = "gui.pokemon.generation";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -282,7 +287,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}		
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonEVs()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonEVs()) {
 				// show the EV stats 
 				String translateKey = "gui.pokemon.evstats";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -325,7 +330,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}		
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonIVs()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonIVs()) {
 				// show the IV stats 
 				String translateKey = "gui.pokemon.ivstats";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -368,7 +373,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonEVYield()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonEVYield()) {
 				// show the EV Yield 
 				String translateKey = "gui.pokemon.evyield";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -396,7 +401,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonNatureInformation()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonNatureInformation()) {
 				// show the nature
 				String translateKey = "gui.pokemon.nature";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -419,7 +424,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonGrowthInformation()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonGrowthInformation()) {
 				// show the type information	
 				String translateKey = "gui.pokemon.growth";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -437,7 +442,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonTypeInformation()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonTypeInformation()) {
 				// show the type information
 				String translateKey = "gui.pokemon.type";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -457,7 +462,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonTypeMatchupInformation()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonTypeMatchupInformation()) {
 				// show the type match-up information
 
 				if (stats != null) {
@@ -488,7 +493,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				}
 			}
 
-			if (ModCommonConfig.instance.wailaEntityShowPokemonCaught()) {
+			if (ModCommonConfig.INSTANCE.wailaEntityShowPokemonCaught()) {
 				// show if we have caught this pixelmon
 				String translateKey = "gui.pokemon.caught";
 				String output = new TranslationTextComponent(translateKey).getString();
@@ -595,9 +600,6 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 	}
 
 	public void register(IRegistrar registrar) {
-		if (!ModCommonConfig.instance.enableWailaIntegration() || !ModCommonConfig.instance.wailaShowEntityInformation())
-			return;
-
 		ArrayList<String> processed = new ArrayList<String>();
 
 		ArrayList<Class<?>> entityClasses = new ArrayList<Class<?>>();

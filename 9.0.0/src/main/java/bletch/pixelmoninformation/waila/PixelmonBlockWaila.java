@@ -31,11 +31,12 @@ public class PixelmonBlockWaila implements IComponentProvider, IServerDataProvid
 
 	@Override
 	public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
-		Minecraft minecraft = Minecraft.getInstance();
-
-		if (ModCommonConfig.instance.wailaUseCrouchKey() && !accessor.getPlayer().isCrouching()) {
+		if (!ModCommonConfig.INSTANCE.wailaShowBlockInformation() 
+				|| ModCommonConfig.INSTANCE.wailaUseCrouchKey() && !accessor.getPlayer().isCrouching()) {
 			return;
 		}
+		
+		Minecraft minecraft = Minecraft.getInstance();
 
 		Block block = accessor.getBlock();
 
@@ -49,7 +50,7 @@ public class PixelmonBlockWaila implements IComponentProvider, IServerDataProvid
 			return;
 		}
 
-		if (ModCommonConfig.instance.wailaBlocksShowTooltip()) {
+		if (ModCommonConfig.INSTANCE.wailaBlocksShowTooltip()) {
 			String translateKey = registryName.getPath() + PixelmonUtils.TOOLTIP_SUFFIX;			
 			String output = new TranslationTextComponent(translateKey).getString();
 
@@ -61,7 +62,7 @@ public class PixelmonBlockWaila implements IComponentProvider, IServerDataProvid
 			}
 		}
 
-		if (ModCommonConfig.instance.wailaBlocksShowInformation()) {
+		if (ModCommonConfig.INSTANCE.wailaBlocksShowInformation()) {
 			String translateKey = registryName.getPath() + PixelmonUtils.INFORMATION_SUFFIX;			
 			String output = new TranslationTextComponent(translateKey).getString();
 
@@ -73,12 +74,12 @@ public class PixelmonBlockWaila implements IComponentProvider, IServerDataProvid
 			}
 		}
 
-//		if (block instanceof ApricornLeavesBlock && ModCommonConfig.instance.wailaBlocksShowGrowthStages()) {
+//		if (block instanceof ApricornLeavesBlock && ModCommonConfig.INSTANCE.wailaBlocksShowGrowthStages()) {
 //			ApricornLeavesBlock leavesBlock = ((ApricornLeavesBlock)block);
 //			
 //		}
 
-//		if (block instanceof BerryLeavesBlock && ModCommonConfig.instance.wailaBlocksShowGrowthStages()) {
+//		if (block instanceof BerryLeavesBlock && ModCommonConfig.INSTANCE.wailaBlocksShowGrowthStages()) {
 //			BerryLeavesBlock leavesBlock = ((BerryLeavesBlock)block);
 //			
 //		}
@@ -92,9 +93,6 @@ public class PixelmonBlockWaila implements IComponentProvider, IServerDataProvid
 	}
 
 	public void register(IRegistrar registrar) {
-		if (!ModCommonConfig.instance.enableWailaIntegration() || !ModCommonConfig.instance.wailaShowBlockInformation())
-			return;
-
 		ArrayList<String> processed = new ArrayList<String>();
 
 		ArrayList<Class<?>> blockClasses = new ArrayList<Class<?>>();

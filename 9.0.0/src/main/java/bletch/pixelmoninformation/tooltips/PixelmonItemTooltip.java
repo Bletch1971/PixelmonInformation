@@ -26,7 +26,8 @@ public class PixelmonItemTooltip {
 
 	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void onItemTooltip(ItemTooltipEvent event) {
-		if (ModClientConfig.instance.tooltipsRestrictToAdvanced() && !event.getFlags().isAdvanced()) {
+		if (!ModClientConfig.INSTANCE.enableTooltipIntegration() || 
+				ModClientConfig.INSTANCE.tooltipsRestrictToAdvanced() && !event.getFlags().isAdvanced()) {
 			return;
 		}
 
@@ -60,10 +61,10 @@ public class PixelmonItemTooltip {
 		if (I18n.exists(tooltipKey)) {    	
 			boolean sneaking = InputMappings.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), settings.keyShift.getKey().getValue());
 
-			if (ModClientConfig.instance.tooltipsUseCrouchKey() && !sneaking) {
+			if (ModClientConfig.INSTANCE.tooltipsUseCrouchKey() && !sneaking) {
 				tooltipKey = KEY_CROUCH;
 
-				if (ModClientConfig.instance.tooltipsShowCrouchKeyInfo() && I18n.exists(tooltipKey)) {
+				if (ModClientConfig.INSTANCE.tooltipsShowCrouchKeyInfo() && I18n.exists(tooltipKey)) {
 					tooltip.add(new TranslationTextComponent(tooltipKey));
 				} 
 

@@ -2,9 +2,6 @@ package bletch.pixelmoninformation.core;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 @ParametersAreNonnullByDefault
 public class ModDetails {
 	private static final int VersionMajor = 1;
@@ -17,8 +14,6 @@ public class ModDetails {
 	public static final String MOD_VERSION = VersionMajor + "." + VersionMinor + "." + VersionRevision;
 
 	public static final String MOD_UPDATE_URL="https://raw.githubusercontent.com/Bletch1971/PixelmonInformation/master/9.0/updateforge.json";
-
-	public static final Logger MOD_LOGGER = LogManager.getLogger(MOD_NAME);
 
 	public static final String MOD_ID_MINECRAFT = "minecraft";
 	public static final String MOD_ID_FORGE = "forge";
