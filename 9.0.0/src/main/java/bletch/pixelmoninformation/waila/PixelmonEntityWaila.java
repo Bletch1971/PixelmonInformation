@@ -103,11 +103,11 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 					output += TextFormatting.WHITE;
 					break;
 				}								
-				
+
 				output += new TranslationTextComponent(bossTier.getName()).getString();
 				output += " ";
 			}
-			
+
 			// add pokemon species name
 			output += TextFormatting.WHITE;
 			output += pixelmon.getLocalizedName();
@@ -122,19 +122,19 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 
 				// add pokemon gender
 				switch (pokemon.getGender()) {
-					case FEMALE:
-						output += " ";
-						output += TextUtils.SYMBOL_FEMALE;
-						break;
-					case MALE:
-						output += " ";
-						output += TextUtils.SYMBOL_MALE;
-						break;
-					default:
-						break;
+				case FEMALE:
+					output += " ";
+					output += TextUtils.SYMBOL_FEMALE;
+					break;
+				case MALE:
+					output += " ";
+					output += TextUtils.SYMBOL_MALE;
+					break;
+				default:
+					break;
 				}
 			}
-			
+
 			if (tooltip.isEmpty()) {
 				tooltip.add(new StringTextComponent(TextFormatting.RESET + output.trim()));
 			} else {
@@ -188,7 +188,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 						output += TextFormatting.WHITE;
 						break;
 					}								
-					
+
 					output += new TranslationTextComponent(bossTier.getName()).getString();
 					output += " ";
 				}
@@ -198,7 +198,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 				output += TextFormatting.WHITE;
 				output += "(" + npcLevel.trim() + ")";
 			}
-			
+
 			if (tooltip.isEmpty()) {
 				tooltip.add(new StringTextComponent(TextFormatting.RESET + output.trim()));
 			} else {
@@ -214,196 +214,196 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 		if (ModCommonConfig.instance.wailaUseCrouchKey() && !accessor.getPlayer().isCrouching()) {
 			return;
 		}
-		
+
 		Entity entity = accessor.getEntity();		
 		CompoundNBT data = accessor.getServerData();
-		
+
 		if (entity instanceof PixelmonEntity) {		
 			PixelmonEntity pixelmon = ((PixelmonEntity)entity);
 			Pokemon pokemon = pixelmon.getPokemon();
 			Species pokemonSpecies = pixelmon.getSpecies();
 			Stats stats = pokemon.getForm();
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonDescription()) {
 				// show pokemon description
 				String output = pokemonSpecies.getDescTranslation().getString();
-		        
-		        if (!StringUtils.isNullOrWhitespace(output)) {
-		        	List<String> outputLines = StringUtils.split(output, minecraft, 4);
+
+				if (!StringUtils.isNullOrWhitespace(output)) {
+					List<String> outputLines = StringUtils.split(output, minecraft, 4);
 					if (outputLines != null && !outputLines.isEmpty()) {
 						outputLines.forEach(l -> tooltip.add(new StringTextComponent(l)));
 					}
-		        }
+				}
 			}
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonOwner()) {
 				String translateKey = "gui.pokemon.owner";
-		        String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (pixelmon.hasOwner() && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+				String output = new TranslationTextComponent(translateKey).getString();
+
+				if (pixelmon.hasOwner() && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
 					String ownerName = pixelmon.getOwner().getName().getString();
-					
+
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + ownerName));
-		        }
+				}
 			}
-						
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonLevel()) {
 				String translateKey = "gui.pokemon.level";
-		        String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        	int level = pixelmon.getLvl().getPokemonLevel();
-		        	
+				String output = new TranslationTextComponent(translateKey).getString();
+
+				if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+					int level = pixelmon.getLvl().getPokemonLevel();
+
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + level));
-		        }	
+				}	
 			}
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonPokedexNumber()) {
 				// show the pokedex number
 				String translateKey = "gui.pokemon.dexnum";
-		        String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (pokemonSpecies != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        	String dexNumber = pokemonSpecies.getFormattedDex();
-		        	
+				String output = new TranslationTextComponent(translateKey).getString();
+
+				if (pokemonSpecies != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+					String dexNumber = pokemonSpecies.getFormattedDex();
+
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + dexNumber));
-		        }				
+				}				
 			}
 
 			if (ModCommonConfig.instance.wailaEntityShowPokemonGeneration()) {
 				// show the generation
 				String translateKey = "gui.pokemon.generation";
-		        String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (pokemonSpecies != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        	int generation = pokemonSpecies.getGeneration();
-		        	
+				String output = new TranslationTextComponent(translateKey).getString();
+
+				if (pokemonSpecies != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+					int generation = pokemonSpecies.getGeneration();
+
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + generation));
-		        }
+				}
 			}		
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonEVs()) {
 				// show the EV stats 
 				String translateKey = "gui.pokemon.evstats";
-		        String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        	String evStats = "";
-			        String delimiter = "";
-	        		
-		        	EVStore store = null;
-		        	if (data.contains(NBT_TAG_EVSTORE)) {
-		        		store = new EVStore();
-			        	store.readFromNBT(data.getCompound(NBT_TAG_EVSTORE));
-		        	} else {
-		        		store = pokemon.getEVs();
-		        	}
-		        	
-		        	BattleStatsType[] statTypes = BattleStatsType.getStatValues();
-			        int total = 0;
-		        	
-		        	for (BattleStatsType type : statTypes) {
-		        		int value = store.getStat(type);
-		        		total += value;
-		        		
-		        		evStats += delimiter;
-		        		evStats += type.getLocalizedName();
-		        		evStats += " (" + value + ")";
-			        	
-			        	delimiter = ", ";
-		        	}
+				String output = new TranslationTextComponent(translateKey).getString();
 
-		        	int maxTotal = EVStore.MAX_TOTAL_EVS;
-		        	int percentage = (int) ((100.0 / maxTotal) * total);
-		        	
-		        	String output2 = TextFormatting.DARK_AQUA + output + " " + TextFormatting.YELLOW + total + "/" + maxTotal + " (" + percentage + "%) " + TextFormatting.WHITE + "- " + evStats;
-		        	
-		        	List<String> outputLines = StringUtils.split(output2, minecraft, 4);
+				if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+					String evStats = "";
+					String delimiter = "";
+
+					EVStore store = null;
+					if (data.contains(NBT_TAG_EVSTORE)) {
+						store = new EVStore();
+						store.readFromNBT(data.getCompound(NBT_TAG_EVSTORE));
+					} else {
+						store = pokemon.getEVs();
+					}
+
+					BattleStatsType[] statTypes = BattleStatsType.getStatValues();
+					int total = 0;
+
+					for (BattleStatsType type : statTypes) {
+						int value = store.getStat(type);
+						total += value;
+
+						evStats += delimiter;
+						evStats += type.getLocalizedName();
+						evStats += " (" + value + ")";
+
+						delimiter = ", ";
+					}
+
+					int maxTotal = EVStore.MAX_TOTAL_EVS;
+					int percentage = (int) ((100.0 / maxTotal) * total);
+
+					String output2 = TextFormatting.DARK_AQUA + output + " " + TextFormatting.YELLOW + total + "/" + maxTotal + " (" + percentage + "%) " + TextFormatting.WHITE + "- " + evStats;
+
+					List<String> outputLines = StringUtils.split(output2, minecraft, 4);
 					if (outputLines != null && !outputLines.isEmpty()) {
 						outputLines.forEach(l -> tooltip.add(new StringTextComponent(l)));
 					}
-		        }
+				}
 			}		
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonIVs()) {
 				// show the IV stats 
 				String translateKey = "gui.pokemon.ivstats";
-		        String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        	String ivStats = "";
-			        String delimiter = "";
-			        
-		        	IVStore store = null;
-		        	if (data.contains(NBT_TAG_IVSTORE)) {
-			        	store = new IVStore();
-			        	store.readFromNBT(data.getCompound(NBT_TAG_IVSTORE));
-		        	} else {
-		        		store = pokemon.getIVs();
-		        	}
-		        	
-		        	BattleStatsType[] statTypes = BattleStatsType.getStatValues();
-		        	int total = 0;
-		        	
-		        	for (BattleStatsType type : statTypes) {
-		        		int value = store.getStat(type);
-		        		total += value;
-		        		
-		        		ivStats += delimiter;
-		        		ivStats += type.getTranslatedName().getString();
-		        		ivStats += " (" + value + ")";
-			        	
-			        	delimiter = ", ";
-		        	}
+				String output = new TranslationTextComponent(translateKey).getString();
 
-		        	int maxTotal = IVStore.MAX_IVS * statTypes.length;
-		        	int percentage = (int) ((100.0 / maxTotal) * total);
-		        	
-		        	String output2 = TextFormatting.DARK_AQUA + output + " " + TextFormatting.YELLOW + total + "/" + maxTotal + " (" + percentage + "%) " + TextFormatting.WHITE + "- " + ivStats;
-		        	
-		        	List<String> outputLines = StringUtils.split(output2, minecraft, 4);
+				if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+					String ivStats = "";
+					String delimiter = "";
+
+					IVStore store = null;
+					if (data.contains(NBT_TAG_IVSTORE)) {
+						store = new IVStore();
+						store.readFromNBT(data.getCompound(NBT_TAG_IVSTORE));
+					} else {
+						store = pokemon.getIVs();
+					}
+
+					BattleStatsType[] statTypes = BattleStatsType.getStatValues();
+					int total = 0;
+
+					for (BattleStatsType type : statTypes) {
+						int value = store.getStat(type);
+						total += value;
+
+						ivStats += delimiter;
+						ivStats += type.getTranslatedName().getString();
+						ivStats += " (" + value + ")";
+
+						delimiter = ", ";
+					}
+
+					int maxTotal = IVStore.MAX_IVS * statTypes.length;
+					int percentage = (int) ((100.0 / maxTotal) * total);
+
+					String output2 = TextFormatting.DARK_AQUA + output + " " + TextFormatting.YELLOW + total + "/" + maxTotal + " (" + percentage + "%) " + TextFormatting.WHITE + "- " + ivStats;
+
+					List<String> outputLines = StringUtils.split(output2, minecraft, 4);
 					if (outputLines != null && !outputLines.isEmpty()) {
 						outputLines.forEach(l -> tooltip.add(new StringTextComponent(l)));
 					}
-		        }
+				}
 			}
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonEVYield()) {
 				// show the EV Yield 
 				String translateKey = "gui.pokemon.evyield";
 				String output = new TranslationTextComponent(translateKey).getString();
 
-		        if (stats != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        	String evYield = "";
-			        String delimiter = "";
-			        
-		        	BattleStatsType[] statValues = BattleStatsType.getStatValues();
-		        	EVYields evYields = stats.getEVYields();
-		        	
-		        	for (int i = 0; i < statValues.length; i++) {
-		        		int evYieldValue = evYields.getYield(statValues[i]);
-		        		if (evYieldValue <= 0)
-		        			continue;
-		        		
-		        		evYield += delimiter;
-		        		evYield += statValues[i].getTranslatedName().getString();
-		        		evYield += " (" + evYieldValue + ")";
-			        	
-			        	delimiter = ", ";
-			        }
-	
+				if (stats != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+					String evYield = "";
+					String delimiter = "";
+
+					BattleStatsType[] statValues = BattleStatsType.getStatValues();
+					EVYields evYields = stats.getEVYields();
+
+					for (int i = 0; i < statValues.length; i++) {
+						int evYieldValue = evYields.getYield(statValues[i]);
+						if (evYieldValue <= 0)
+							continue;
+
+						evYield += delimiter;
+						evYield += statValues[i].getTranslatedName().getString();
+						evYield += " (" + evYieldValue + ")";
+
+						delimiter = ", ";
+					}
+
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + evYield));		        	
-		        }
+				}
 			}
 
 			if (ModCommonConfig.instance.wailaEntityShowPokemonNatureInformation()) {
 				// show the nature
 				String translateKey = "gui.pokemon.nature";
 				String output = new TranslationTextComponent(translateKey).getString();
-				
+
 				if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-			        String natureName = "";
-					
+					String natureName = "";
+
 					Nature nature = null;
 					if (data.contains(NBT_TAG_NATURE)) {
 						nature = Nature.getNatureFromIndex(data.getInt(NBT_TAG_NATURE));
@@ -422,11 +422,11 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 			if (ModCommonConfig.instance.wailaEntityShowPokemonGrowthInformation()) {
 				// show the type information	
 				String translateKey = "gui.pokemon.growth";
-		        String output = new TranslationTextComponent(translateKey).getString();
+				String output = new TranslationTextComponent(translateKey).getString();
 
 				if (pokemon != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-			        String growthName = "";
-			        
+					String growthName = "";
+
 					EnumGrowth growth = pokemon.getGrowth();
 
 					if (growth != null) {
@@ -434,74 +434,74 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 					}
 
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + growthName));
-		        }
+				}
 			}
 
 			if (ModCommonConfig.instance.wailaEntityShowPokemonTypeInformation()) {
 				// show the type information
 				String translateKey = "gui.pokemon.type";
-		        String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (stats != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {	
-			        String types = "";
-			        String delimiter = "";
-			        
-			        for (Element type : stats.getTypes()) {
-			        	types += delimiter;
-			        	types += type.getTranslatedName().getString();
-			        	
-			        	delimiter = ", ";
-			        }
-			        
+				String output = new TranslationTextComponent(translateKey).getString();
+
+				if (stats != null && I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {	
+					String types = "";
+					String delimiter = "";
+
+					for (Element type : stats.getTypes()) {
+						types += delimiter;
+						types += type.getTranslatedName().getString();
+
+						delimiter = ", ";
+					}
+
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + types));		        	
-		        }
+				}
 			}
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonTypeMatchupInformation()) {
 				// show the type match-up information
 
-		        if (stats != null) {
-			        for (Element type : stats.getTypes()) {
-			        	String typeName = type.getTranslatedName().getString();
-			        	String typeValue = type.name().toLowerCase();
-			        	String output = "";
+				if (stats != null) {
+					for (Element type : stats.getTypes()) {
+						String typeName = type.getTranslatedName().getString();
+						String typeValue = type.name().toLowerCase();
+						String output = "";
 						String translateKey = "";
-			        	
+
 						translateKey = "pokemontype." + typeValue + ".strong";
-		        		output = new TranslationTextComponent(translateKey).getString();
-		        		if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        			tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
-		        		}
-		        		
+						output = new TranslationTextComponent(translateKey).getString();
+						if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+							tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
+						}
+
 						translateKey = "pokemontype." + typeValue + ".weak";
-		        		output = new TranslationTextComponent(translateKey).getString();
-		        		if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        			tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
-		        		}
+						output = new TranslationTextComponent(translateKey).getString();
+						if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+							tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
+						}
 
 						translateKey = "pokemontype." + typeValue + ".bad";
-		        		output = new TranslationTextComponent(translateKey).getString();
-		        		if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
-		        			tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
-		        		}
-			        }
-		        }
+						output = new TranslationTextComponent(translateKey).getString();
+						if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
+							tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + typeName + ": " + output));
+						}
+					}
+				}
 			}
-			
+
 			if (ModCommonConfig.instance.wailaEntityShowPokemonCaught()) {
 				// show if we have caught this pixelmon
 				String translateKey = "gui.pokemon.caught";
 				String output = new TranslationTextComponent(translateKey).getString();
-				
+
 				if (I18n.exists(translateKey) && !StringUtils.isNullOrWhitespace(output)) {
 					String caughtStatus = TextUtils.SYMBOL_UNKNOWN;
-					
+
 					ClientPlayerPokedex pokedex = PixelmonUtils.getClientPokedex();
-				
+
 					if (pokedex != null) {
 						caughtStatus = pokedex.hasCaught(pokemonSpecies) ? TextUtils.SYMBOL_GREENTICK : TextUtils.SYMBOL_REDCROSS;
 					}
-					
+
 					tooltip.add(new StringTextComponent(TextFormatting.DARK_AQUA + output + " " + TextFormatting.WHITE + caughtStatus));
 				}
 			}
@@ -543,7 +543,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 			if (entity instanceof NPCNurseJoy) {
 				NPCNurseJoy entityNPC = (NPCNurseJoy)entity;
 				//npcName = entityNPC.getDisplayText();
-				
+
 				String nameKey = entityNPC.getTextureIndex() == 1 ? "gui.nursejoy.name" : "gui.doctorjohn.name";
 				npcName = new TranslationTextComponent(nameKey).getString();
 			}
@@ -597,12 +597,12 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 	public void register(IRegistrar registrar) {
 		if (!ModCommonConfig.instance.enableWailaIntegration() || !ModCommonConfig.instance.wailaShowEntityInformation())
 			return;
-		
+
 		ArrayList<String> processed = new ArrayList<String>();
 
 		ArrayList<Class<?>> entityClasses = new ArrayList<Class<?>>();
 		entityClasses.addAll(PixelmonUtils.getPixelmonEntityClasses());
-		
+
 		// remove any entities that are inherited from other pixelmon mod entities
 		for (int i = entityClasses.size() - 1; i >= 0; i--) {
 			if (entityClasses.contains(entityClasses.get(i).getSuperclass())) {

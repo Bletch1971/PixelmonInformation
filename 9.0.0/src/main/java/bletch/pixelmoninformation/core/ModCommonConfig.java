@@ -18,7 +18,7 @@ public class ModCommonConfig {
 	//private final ForgeConfigSpec.BooleanValue enableJeiIntegration;
 	private final ForgeConfigSpec.BooleanValue enableWailaIntegration;
 	private final ForgeConfigSpec.BooleanValue enableTopIntegration;
-	
+
 	private final ForgeConfigSpec.BooleanValue wailaUseCrouchKey;
 	private final ForgeConfigSpec.BooleanValue wailaShowBlockInformation;
 	private final ForgeConfigSpec.BooleanValue wailaBlocksShowTooltip;
@@ -38,7 +38,7 @@ public class ModCommonConfig {
 	private final ForgeConfigSpec.BooleanValue wailaEntityShowPokemonIVs;
 	private final ForgeConfigSpec.BooleanValue wailaEntityShowPokemonTypeMatchupInformation;
 	private final ForgeConfigSpec.BooleanValue wailaEntityShowPokemonCaught;
-	
+
 	private final ForgeConfigSpec.BooleanValue topUseCrouchKey;
 	private final ForgeConfigSpec.BooleanValue topShowBlockInformation;
 	private final ForgeConfigSpec.BooleanValue topBlocksShowTooltip;
@@ -88,7 +88,7 @@ public class ModCommonConfig {
 			enableWailaIntegration = BUILDER.define("enableWailaIntegration", true);
 			BUILDER.comment("If true, will only show information when crouching.");
 			wailaUseCrouchKey = BUILDER.define("wailaUseCrouchKey", false);
-			
+
 			BUILDER.push("blocks");
 			{
 				BUILDER.comment("If true, will show the block information in Waila.");
@@ -101,7 +101,7 @@ public class ModCommonConfig {
 //				wailaBlocksShowGrowthStages = BUILDER.define("wailaBlocksShowGrowthStages", true);
 			}
 			BUILDER.pop();
-			
+
 			BUILDER.push("entities");
 			{
 				BUILDER.comment("If true, will show the entity information in Waila.");
@@ -143,7 +143,7 @@ public class ModCommonConfig {
 			enableTopIntegration = BUILDER.define("enableTopIntegration", true);
 			BUILDER.comment("If true, will only show information when crouching.");
 			topUseCrouchKey = BUILDER.define("topUseCrouchKey", true);
-			
+
 			BUILDER.push("blocks");
 			{
 				BUILDER.comment("If true, will show the block information in The One Probe.");
@@ -156,7 +156,7 @@ public class ModCommonConfig {
 //				topBlocksShowGrowthStages = BUILDER.define("topBlocksShowGrowthStages", true);
 			}
 			BUILDER.pop();
-			
+
 			BUILDER.push("entities");
 			{
 				BUILDER.comment("If true, will show the entity information in The One Probe.");
@@ -204,7 +204,7 @@ public class ModCommonConfig {
 	public boolean enableTopIntegration() {
 		return this.enableTopIntegration.get();
 	}
-	
+
 	public boolean wailaUseCrouchKey() {
 		return this.wailaUseCrouchKey.get();
 	}
@@ -262,7 +262,7 @@ public class ModCommonConfig {
 	public boolean wailaEntityShowPokemonCaught() {
 		return this.wailaEntityShowPokemonCaught.get();
 	}
-	
+
 	public boolean topUseCrouchKey() {
 		return this.topUseCrouchKey.get();
 	}

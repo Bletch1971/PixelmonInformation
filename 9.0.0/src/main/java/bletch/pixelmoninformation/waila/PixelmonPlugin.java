@@ -16,5 +16,5 @@ public class PixelmonPlugin implements IWailaPlugin {
 		PixelmonBlockWaila.INSTANCE.register(registrar);
 		PixelmonEntityWaila.INSTANCE.register(registrar);
 	}
-	
+
 }

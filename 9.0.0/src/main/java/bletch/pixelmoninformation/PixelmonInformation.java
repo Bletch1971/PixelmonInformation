@@ -24,7 +24,7 @@ public class PixelmonInformation
 
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onEnqueueIMC);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onEnqueueIMC);
 
 		// Register ourselves for server and other game events we are interested in
 		MinecraftForge.EVENT_BUS.register(this);
@@ -49,5 +49,5 @@ public class PixelmonInformation
 			InterModComms.sendTo(ModDetails.MOD_ID_TOP, "getTheOneProbe", PixelmonBlockTop.getTheOneProbe::new);
 			InterModComms.sendTo(ModDetails.MOD_ID_TOP, "getTheOneProbe", PixelmonEntityTop.getTheOneProbe::new);
 		}
-    }
+	}
 }

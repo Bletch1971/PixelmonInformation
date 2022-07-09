@@ -23,15 +23,15 @@ public class PixelmonBlockTop {
 	public static class getTheOneProbe implements Function<ITheOneProbe, Void> {
 
 		public static ITheOneProbe probe;
-		
+
 		@Override
 		public Void apply(ITheOneProbe theOneProbe) {
 			probe = theOneProbe;
-			
+
 			if (WrappedTextElement.ELEMENT_ID == -1) {
 				WrappedTextElement.ELEMENT_ID = probe.registerElementFactory(new WrappedTextElement.Factory());
 			}
-			
+
 			probe.registerProvider(new IProbeInfoProvider() {
 
 				@Override
@@ -42,71 +42,71 @@ public class PixelmonBlockTop {
 				@Override
 				public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
 					Block block = state.getBlock();
-					
+
 					if (block.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
 						PixelmonBlockTop.getTheOneProbe.addPixelmonBlockInfo(mode, probeInfo, player, world, state, data);
 					}	
 				}
 
 			});
-			
+
 			probe.registerBlockDisplayOverride((mode, probeInfo, player, world, state, data) -> {
 				Block block = state.getBlock();
-				
+
 				if (block.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
 					return PixelmonBlockTop.getTheOneProbe.overridePixelmonBlockInfo(mode, probeInfo, player, world, state, data);
 				}
-				
+
 				return false;
 			});
-			
+
 			return null;
 		}
-		
+
 		private static boolean addPixelmonBlockInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
-			
+
 			if (ModCommonConfig.instance.topUseCrouchKey() && !player.isCrouching()) {
 				return false;
 			}
-			
+
 			Block block = state.getBlock();
 
 			ResourceLocation registryName = block.getRegistryName();
 			if (registryName == null) {
 				return false;
 			}
-			
+
 			if (ModCommonConfig.instance.wailaBlocksShowTooltip()) {
 				String translateKey = registryName.getPath() + PixelmonUtils.TOOLTIP_SUFFIX;			
 				String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
-		        	probeInfo.element(new WrappedTextElement(output));
-		        }
+
+				if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
+					probeInfo.element(new WrappedTextElement(output));
+				}
 			}
-			
+
 			if (ModCommonConfig.instance.wailaBlocksShowInformation()) {
 				String translateKey = registryName.getPath() + PixelmonUtils.INFORMATION_SUFFIX;			
 				String output = new TranslationTextComponent(translateKey).getString();
-		        
-		        if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
-	        		probeInfo.element(new WrappedTextElement(output));
-		        }
+
+				if (!StringUtils.isNullOrWhitespace(output) && !output.equalsIgnoreCase(translateKey)) {
+					probeInfo.element(new WrappedTextElement(output));
+				}
 			}
-			
-//			if (block instanceof ApricornLeavesBlock && ModCommonConfig.instance.topBlocksShowGrowthStages()) {
-//				ApricornLeavesBlock leavesBlock = ((ApricornLeavesBlock)block);
-//				
-//			}
-			
-//			if (block instanceof BerryLeavesBlock && ModCommonConfig.instance.topBlocksShowGrowthStages()) {
-//				BerryLeavesBlock leavesBlock = ((BerryLeavesBlock)block);
-//				
-//			}
-			
+
+			//			if (block instanceof ApricornLeavesBlock && ModCommonConfig.instance.topBlocksShowGrowthStages()) {
+			//				ApricornLeavesBlock leavesBlock = ((ApricornLeavesBlock)block);
+			//				
+			//			}
+
+			//			if (block instanceof BerryLeavesBlock && ModCommonConfig.instance.topBlocksShowGrowthStages()) {
+			//				BerryLeavesBlock leavesBlock = ((BerryLeavesBlock)block);
+			//				
+			//			}
+
 			return true;
 		}
-		
+
 		private static boolean overridePixelmonBlockInfo(ProbeMode mode, IProbeInfo probeInfo, PlayerEntity player, World world, BlockState state, IProbeHitData data) {
 			return false;
 		}
