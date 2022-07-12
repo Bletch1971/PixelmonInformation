@@ -3,6 +3,7 @@ package bletch.pixelmoninformation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -52,8 +53,10 @@ public class PixelmonInformation
 	}
 
 	private void onEnqueueIMC(final InterModEnqueueEvent event) {
-		InterModComms.sendTo(ModDetails.MOD_ID_TOP, "getTheOneProbe", PixelmonBlockTop.getTheOneProbe::new);
-		InterModComms.sendTo(ModDetails.MOD_ID_TOP, "getTheOneProbe", PixelmonEntityTop.getTheOneProbe::new);
+		if (ModList.get().isLoaded(ModDetails.MOD_ID_TOP)) {
+			InterModComms.sendTo(ModDetails.MOD_ID_TOP, "getTheOneProbe", PixelmonBlockTop.getTheOneProbe::new);
+			InterModComms.sendTo(ModDetails.MOD_ID_TOP, "getTheOneProbe", PixelmonEntityTop.getTheOneProbe::new);
+		}		
 	}
 
 	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {

@@ -1,11 +1,12 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/pixelmon-information",
   "promos": {
-    "1.16.5-latest": "2.1.0",
-    "1.16.5-recommended": "2.1.0"
+    "1.16.5-latest": "2.2.0",
+    "1.16.5-recommended": "2.2.0"
   },
   "1.16.5": {
     "2.0.0": "Updated for Minecraft 1.16.5, Forge 36.2.34 and Pixelmon 9.0.",
-    "2.1.0": "Synced common settings between server and clients."
+    "2.1.0": "Synced common settings between server and clients.",
+    "2.2.0": "Fixed crashing bug when The One Probe mod is not included."
   }
 }
