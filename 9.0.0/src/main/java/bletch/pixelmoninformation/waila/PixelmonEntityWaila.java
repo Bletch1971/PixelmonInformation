@@ -118,10 +118,11 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 
 			if (pokemon != null) {
 				// add pokemon nickname
-				if (!StringUtils.isNullOrWhitespace(pokemon.getNickname())) {
+				String nickName = pokemon.getFormattedNickname().getString();
+				if (!StringUtils.isNullOrWhitespace(nickName)) {
 					output += " ";
 					output += TextFormatting.ITALIC;
-					output += "(" + pokemon.getNickname() + ")";
+					output += "(" + nickName + ")";
 				}
 
 				// add pokemon gender
@@ -304,7 +305,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 						store = pokemon.getEVs();
 					}
 
-					BattleStatsType[] statTypes = BattleStatsType.getStatValues();
+					BattleStatsType[] statTypes = BattleStatsType.getEVIVStatValues();
 					int total = 0;
 
 					for (BattleStatsType type : statTypes) {
@@ -347,7 +348,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 						store = pokemon.getIVs();
 					}
 
-					BattleStatsType[] statTypes = BattleStatsType.getStatValues();
+					BattleStatsType[] statTypes = BattleStatsType.getEVIVStatValues();
 					int total = 0;
 
 					for (BattleStatsType type : statTypes) {
@@ -382,7 +383,7 @@ public class PixelmonEntityWaila implements IEntityComponentProvider , IServerDa
 					String evYield = "";
 					String delimiter = "";
 
-					BattleStatsType[] statValues = BattleStatsType.getStatValues();
+					BattleStatsType[] statValues = BattleStatsType.getEVIVStatValues();
 					EVYields evYields = stats.getEVYields();
 
 					for (int i = 0; i < statValues.length; i++) {

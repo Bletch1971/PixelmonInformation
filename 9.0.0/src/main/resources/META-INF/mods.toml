@@ -42,7 +42,7 @@ description='''
 [[dependencies.pixelmoninformation]]
     modId="pixelmon"
     mandatory=true
-    versionRange="[9.0.0,)"
+    versionRange="[9.0.10,)"
     ordering="AFTER"
     side="BOTH"
  
