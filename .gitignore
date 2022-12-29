@@ -85,3 +85,5 @@ libs/
 run/
 runClient/
 runServer/
+
+.vs
