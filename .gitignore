@@ -85,3 +85,6 @@ libs/
 run/
 runClient/
 runServer/
+
+# Visual Studio cache/options directory
+.vs/
