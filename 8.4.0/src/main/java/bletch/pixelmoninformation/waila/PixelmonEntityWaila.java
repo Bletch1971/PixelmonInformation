@@ -32,7 +32,6 @@ import com.pixelmonmod.pixelmon.enums.EnumType;
 import com.pixelmonmod.pixelmon.pokedex.Pokedex;
 
 import bletch.pixelmoninformation.core.ModConfig;
-import bletch.pixelmoninformation.utils.DebugUtils;
 import bletch.pixelmoninformation.utils.PixelmonUtils;
 import bletch.pixelmoninformation.utils.StringUtils;
 import bletch.pixelmoninformation.utils.TextUtils;
@@ -552,10 +551,6 @@ public class PixelmonEntityWaila implements IWailaEntityProvider {
         	
         	registrar.registerHeadProvider(entityProvider, entity);
 			registrar.registerBodyProvider(entityProvider, entity);
-			
-			if (ModConfig.debug.enableDebug && ModConfig.debug.showWailaEntitiesRegistered) {
-				DebugUtils.writeLine("Registered WAILA information for entity " + key, true);
-			} 
 		}
 	}
 	

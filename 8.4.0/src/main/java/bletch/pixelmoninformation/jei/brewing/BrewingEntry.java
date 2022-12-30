@@ -40,7 +40,7 @@ public class BrewingEntry extends IForgeRegistryEntry.Impl<BrewingEntry> {
     	this.input2 = inputStack2;
     	this.output = outputStack;
         
-    	String resourcePath = ModDetails.MOD_ID + "/" + this.input1.getItem().getRegistryName().getResourcePath() + "__" + this.output.getItem().getRegistryName().getResourcePath();
+    	String resourcePath = ModDetails.MOD_ID + "/" + this.input1.getItem().getRegistryName().getNamespace() + "__" + this.output.getItem().getRegistryName().getNamespace();
         setRegistryName(new ResourceLocation(ModDetails.MOD_ID_JEI, resourcePath));
     }
     

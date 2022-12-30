@@ -15,14 +15,15 @@ import bletch.pixelmoninformation.core.ModDetails;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 @ParametersAreNonnullByDefault
 public class PixelmonUtils {
 	
 	public static List<Block> getPixelmonBlocks() {
 
-		return StreamSupport.stream(Block.REGISTRY.spliterator(), false)
-				.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
+		return StreamSupport.stream(ForgeRegistries.BLOCKS.spliterator(), false)
+				.filter(b -> b.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
 				.distinct()
 				.sorted((b1, b2) -> b1.getClass().getTypeName().compareTo(b2.getClass().getTypeName()))
 				.collect(Collectors.toList());
@@ -30,8 +31,8 @@ public class PixelmonUtils {
 	
 	public static List<ItemStack> getPixelmonBlockStacks() {
 
-		return StreamSupport.stream(Block.REGISTRY.spliterator(), false)
-				.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
+		return StreamSupport.stream(ForgeRegistries.BLOCKS.spliterator(), false)
+				.filter(b -> b.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
 				.distinct()
 				.map(b -> new ItemStack(b))
 				.sorted((s1, s2) -> s1.getClass().getTypeName().compareTo(s2.getClass().getTypeName()))
@@ -40,8 +41,8 @@ public class PixelmonUtils {
 	
 	public static List<Class<?>> getPixelmonBlockClasses() {
 
-		return StreamSupport.stream(Block.REGISTRY.spliterator(), false)
-				.filter(b -> b.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
+		return StreamSupport.stream(ForgeRegistries.BLOCKS.spliterator(), false)
+				.filter(b -> b.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
 				.map(b -> b.getClass())
 				.filter(c -> !c.getTypeName().equalsIgnoreCase(Block.class.getTypeName()))
 				.distinct()
@@ -51,8 +52,8 @@ public class PixelmonUtils {
 	
 	public static List<Item> getPixelmonItems() {
 
-		return StreamSupport.stream(Item.REGISTRY.spliterator(), false)
-        		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
+		return StreamSupport.stream(ForgeRegistries.ITEMS.spliterator(), false)
+        		.filter(i -> i.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
         		.distinct()
         		.sorted((i1, i2) -> i1.getClass().getTypeName().compareTo(i2.getClass().getTypeName()))
         		.collect(Collectors.toList());
@@ -60,8 +61,8 @@ public class PixelmonUtils {
 	
 	public static List<ItemStack> getPixelmonItemStacks() {
 
-		return StreamSupport.stream(Item.REGISTRY.spliterator(), false)
-        		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
+		return StreamSupport.stream(ForgeRegistries.ITEMS.spliterator(), false)
+        		.filter(i -> i.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
         		.distinct()
         		.map(i -> new ItemStack(i))
         		.sorted((s1, s2) -> s1.getClass().getTypeName().compareTo(s2.getClass().getTypeName()))
@@ -70,8 +71,8 @@ public class PixelmonUtils {
 	
 	public static List<Class<?>> getPixelmonItemClasses() {
 
-		return StreamSupport.stream(Item.REGISTRY.spliterator(), false)
-        		.filter(i -> i.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
+		return StreamSupport.stream(ForgeRegistries.ITEMS.spliterator(), false)
+        		.filter(i -> i.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON))
         		.distinct()
         		.map(i -> i.getClass())
         		.sorted((c1, c2) -> c1.getTypeName().compareTo(c2.getTypeName()))
@@ -85,7 +86,6 @@ public class PixelmonUtils {
 		}
 
 		try {
-			// new location of Pokedex - 7.0.4
 			Field pokedexField = ClientStorageManager.class.getDeclaredField("pokedex");
 			if (pokedexField != null) {
 				pokedexField.setAccessible(true);
@@ -97,7 +97,6 @@ public class PixelmonUtils {
 			}
 		}
 		catch (Exception ex) {
-			//ModDetails.MOD_LOGGER.info("Issue occurred reflecting ClientStorageManager.pokedex.");
 		}
 		
 		return null;

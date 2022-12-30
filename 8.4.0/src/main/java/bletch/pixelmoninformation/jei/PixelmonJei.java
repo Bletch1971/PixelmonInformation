@@ -51,7 +51,6 @@ import bletch.pixelmoninformation.jei.shopkeeper.ShopKeeperCategory;
 import bletch.pixelmoninformation.jei.shopkeeper.ShopKeeperEntry;
 import bletch.pixelmoninformation.jei.shopkeeper.ShopKeeperRegistry;
 import bletch.pixelmoninformation.jei.shopkeeper.ShopKeeperWrapper;
-import bletch.pixelmoninformation.utils.DebugUtils;
 import bletch.pixelmoninformation.utils.PixelmonUtils;
 import bletch.pixelmoninformation.utils.TextUtils;
 import mezz.jei.api.IGuiHelper;
@@ -273,7 +272,7 @@ public class PixelmonJei implements IModPlugin {
     		}
 
 			for (ItemStack itemStack : itemStackList) {
-				String key = itemStack.getUnlocalizedName() + KEY_SUFFIX;
+				String key = itemStack.getTranslationKey() + KEY_SUFFIX;
 				
 	        	if (processed.contains(key)) {
 	        		continue;
@@ -281,45 +280,22 @@ public class PixelmonJei implements IModPlugin {
 	        	processed.add(key);
 	        	
 	        	// check if the item belongs to the Pixelmon domain
-	        	if (!itemStack.getItem().getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
+	        	if (!itemStack.getItem().getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
 	        		continue;
 	        	}
 	        	
-				if (TextUtils.canTranslate(key) || ModConfig.debug.enableDebug && ModConfig.debug.registerJeiMissingInformation) {
+				if (TextUtils.canTranslate(key)) {
 					
 					try {
 						registry.addIngredientInfo(itemStack, VanillaTypes.ITEM, key);
-						count++;
-						
-						if (ModConfig.debug.enableDebug && ModConfig.debug.showJeiRegisteredInformation) {
-							registeredInformation.add("Registered JEI information for " + itemStack.getDisplayName() + "; key: " + key);
-						} 
+						count++; 
 					}
 		    		catch (Exception e) {
-		    			if (ModConfig.debug.enableDebug) {
-		    				DebugUtils.writeLine("Error registering JEI information for " + itemStack.getDisplayName() + "; key: " + key, true);
-		    			}
 		    		}
-					
-				} else {
-
-					if (ModConfig.debug.enableDebug && ModConfig.debug.showJeiMissingInformation) {
-						missingInformation.add("Missing JEI information for " + itemStack.getDisplayName() + "; key: " + key);
-        			}
-					
+			
 				}
 			}
 		}
-    	
-    	if (ModConfig.debug.enableDebug && registeredInformation != null && registeredInformation.size() > 0) {
-    		registeredInformation.sort((i1, i2) -> i1.compareTo(i2));
-    		DebugUtils.writeLines(registeredInformation, true);
-    	}
-    	
-    	if (ModConfig.debug.enableDebug && missingInformation != null && missingInformation.size() > 0) {
-    		missingInformation.sort((i1, i2) -> i1.compareTo(i2));
-    		DebugUtils.writeLines(missingInformation, true);
-    	}
     	
     	ModDetails.MOD_LOGGER.info("Registered item/block information with JEI - count: " + count);
 	}

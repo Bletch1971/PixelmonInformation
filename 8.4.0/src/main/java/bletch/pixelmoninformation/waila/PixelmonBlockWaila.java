@@ -9,7 +9,6 @@ import com.pixelmonmod.pixelmon.blocks.tileEntities.TileEntityApricornTree;
 import com.pixelmonmod.pixelmon.blocks.tileEntities.TileEntityBerryTree;
 
 import bletch.pixelmoninformation.core.ModConfig;
-import bletch.pixelmoninformation.utils.DebugUtils;
 import bletch.pixelmoninformation.utils.PixelmonUtils;
 import bletch.pixelmoninformation.utils.StringUtils;
 import bletch.pixelmoninformation.utils.TextUtils;
@@ -17,11 +16,13 @@ import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -54,13 +55,15 @@ public class PixelmonBlockWaila implements IWailaDataProvider {
 		}
 		
 		TileEntity tileEntity = accessor.getTileEntity();
+		Block block = accessor.getBlock();
+
+		ResourceLocation registryName = block.getRegistryName();
+		if (registryName == null) {
+			return currentTip;
+		}
 		
 		if (ModConfig.waila.blocks.showBlockTooltip) {
-			String translateKey_tooltip = itemStack.getUnlocalizedName() + KEY_SUFFIX_TOOLTIP;
-			
-			if (ModConfig.debug.enableDebug && ModConfig.debug.showWailaBlockTranslationKey) {
-				currentTip.add(TextUtils.translate("gui.translationkey") + " " + translateKey_tooltip);
-			}
+			String translateKey_tooltip = registryName.getPath() + KEY_SUFFIX_TOOLTIP;
 			
 			String output = TextUtils.translate(translateKey_tooltip);
 			List<String> results = StringUtils.split(output, minecraft, 4);
@@ -71,11 +74,7 @@ public class PixelmonBlockWaila implements IWailaDataProvider {
 		}
 		
 		if (ModConfig.waila.blocks.showBlockInformation) {
-			String translateKey_information = itemStack.getUnlocalizedName() + KEY_SUFFIX_INFORMATION;
-			
-			if (ModConfig.debug.enableDebug && ModConfig.debug.showWailaBlockTranslationKey) {
-				currentTip.add(TextUtils.translate("gui.translationkey") + " " + translateKey_information);
-			}
+			String translateKey_information = registryName.getPath() + KEY_SUFFIX_INFORMATION;
 			
 			String output = TextUtils.translate(translateKey_information);
 			List<String> results = StringUtils.split(output, minecraft, 4);
@@ -145,11 +144,7 @@ public class PixelmonBlockWaila implements IWailaDataProvider {
         	processed.add(key);
         	
         	registrar.registerNBTProvider(dataProvider, pixelmonClass);
-			registrar.registerBodyProvider(dataProvider, pixelmonClass);
-			
-			if (ModConfig.debug.enableDebug && ModConfig.debug.showWailaBlocksRegistered) {
-				DebugUtils.writeLine("Registered WAILA information for block " + key, true);
-			} 
+			registrar.registerBodyProvider(dataProvider, pixelmonClass); 
 		}	
 	}
 

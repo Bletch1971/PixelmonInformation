@@ -30,7 +30,7 @@ public class ModUtils {
         }
         
         ResourceLocation itemResourceLocation = block.getRegistryName();
-        String modId = itemResourceLocation.getResourceDomain();
+        String modId = itemResourceLocation.getNamespace();
         String lowercaseModId = modId.toLowerCase(Locale.ENGLISH);
         String modName = modNamesForIds.get(lowercaseModId);
         

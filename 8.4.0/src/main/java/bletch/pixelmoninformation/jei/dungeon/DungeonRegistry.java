@@ -43,7 +43,7 @@ public class DungeonRegistry {
         LootTableManager manager = LootHelper.getLootTableManager();
         if (manager != null) {
 	        LootHelper.getAllChestLootTablesResourceLocations().stream()
-	            .map(resourceLocation -> new DungeonEntry(resourceLocation.getResourcePath(), manager.getLootTableFromLocation(resourceLocation)))
+	            .map(resourceLocation -> new DungeonEntry(resourceLocation.getNamespace(), manager.getLootTableFromLocation(resourceLocation)))
 	            .forEach(e -> addEntry(e));
         }
 	}

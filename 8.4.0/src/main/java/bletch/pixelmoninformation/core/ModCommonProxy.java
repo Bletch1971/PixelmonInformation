@@ -1,14 +1,11 @@
 package bletch.pixelmoninformation.core;
 
-import java.io.File;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import bletch.pixelmoninformation.top.PixelmonBlockTop;
 import bletch.pixelmoninformation.top.PixelmonEntityTop;
-import bletch.pixelmoninformation.utils.DebugUtils;
 import bletch.pixelmoninformation.waila.PixelmonBlockWaila;
 import bletch.pixelmoninformation.waila.PixelmonEntityWaila;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
@@ -17,10 +14,6 @@ public class ModCommonProxy {
 	
 	public boolean isRemote() {
 		return false;
-	}
-
-	public File getMinecraftDirectory() {
-		return FMLCommonHandler.instance().getMinecraftServerInstance().getFile("");
 	}
 	
 	public void registerLootHelper() {
@@ -51,12 +44,6 @@ public class ModCommonProxy {
 			FMLInterModComms.sendMessage(ModDetails.MOD_ID_WAILA, "register", PixelmonEntityWaila.class.getTypeName() + ".callbackRegister");
 			ModDetails.MOD_LOGGER.info("Registered entities with Waila");
 		}
-	}
-	
-	public void resetDebug() {
-		if (ModConfig.debug.enableDebug) {
-			DebugUtils.resetDebug();
-		}		
 	}
 	
 }

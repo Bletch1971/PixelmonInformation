@@ -22,7 +22,7 @@ public class PokeChestEntry extends IForgeRegistryEntry.Impl<PokeChestEntry> {
     public PokeChestEntry(PokeChestDrop drop) {
 		this.drop = drop;
 		
-		String resourcePath = ModDetails.MOD_ID + "/" + this.drop.getBlock().getRegistryName().getResourcePath();
+		String resourcePath = ModDetails.MOD_ID + "/" + this.drop.getBlock().getRegistryName().getNamespace();
         setRegistryName(new ResourceLocation(ModDetails.MOD_ID_JEI, resourcePath));
 	}
     

@@ -49,17 +49,14 @@ public class PixelmonItemTooltip {
     		return;
     	}
     	
-    	String resourceDomain = registryName.getResourceDomain();
+    	String resourceDomain = registryName.getNamespace();
     	if (resourceDomain == null || !(ModDetails.MOD_ID_PIXELMON.equalsIgnoreCase(resourceDomain))) {
     		return;
     	}
-    	
-		String translateKey = itemStack.getUnlocalizedName() + KEY_SUFFIX;
-		if (ModConfig.debug.enableDebug && ModConfig.debug.showTooltipTranslationKey) {
-			tooltip.add(TextUtils.translate("gui.translationkey") + " " + translateKey);	
-		}
+
+		String tooltipKey = registryName.getPath() + KEY_SUFFIX;
 		
-		List<String> value = TextUtils.translateMulti(translateKey);
+		List<String> value = TextUtils.translateMulti(tooltipKey);
 		if (value != null && value.size() > 0) { 
 			
 			if (ModConfig.tooltips.useShiftKey) {

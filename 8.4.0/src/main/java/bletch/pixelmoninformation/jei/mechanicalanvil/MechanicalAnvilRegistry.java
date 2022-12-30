@@ -77,9 +77,9 @@ public class MechanicalAnvilRegistry {
 					}
 				}
 				
-				if (itemStack.getUnlocalizedName().equalsIgnoreCase("item.iron_disc") ) {
+				if (itemStack.getTranslationKey().equalsIgnoreCase("item.iron_disc") ) {
 					Optional<ItemStack> itemBase = pixelmonItemStacks.stream()
-							.filter(s -> s.getUnlocalizedName().equalsIgnoreCase("item.iron_base"))
+							.filter(s -> s.getTranslationKey().equalsIgnoreCase("item.iron_base"))
 							.findFirst();					
 					
 					if (itemBase.isPresent()) {
@@ -87,9 +87,9 @@ public class MechanicalAnvilRegistry {
 					}
 				}
 				
-				if (itemStack.getUnlocalizedName().equalsIgnoreCase("item.aluminum_disc") ) {
+				if (itemStack.getTranslationKey().equalsIgnoreCase("item.aluminum_disc") ) {
 					Optional<ItemStack> itemBase = pixelmonItemStacks.stream()
-							.filter(s -> s.getUnlocalizedName().equalsIgnoreCase("item.aluminum_base"))
+							.filter(s -> s.getTranslationKey().equalsIgnoreCase("item.aluminum_base"))
 							.findFirst();					
 					
 					if (itemBase.isPresent()) {

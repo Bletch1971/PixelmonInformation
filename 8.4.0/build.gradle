@@ -22,7 +22,8 @@ println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getPro
 
 minecraft {
     //mappings channel: 'snapshot', version: '20171003-1.12'
-    mappings channel: 'snapshot', version: '20180504-1.12'
+    //mappings channel: 'snapshot', version: '20180504-1.12'
+    mappings channel: 'stable', version: 'nodoc_39-1.12'
     
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 

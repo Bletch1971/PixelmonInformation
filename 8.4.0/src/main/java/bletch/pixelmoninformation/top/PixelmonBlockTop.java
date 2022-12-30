@@ -18,6 +18,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class PixelmonBlockTop {
@@ -52,7 +53,7 @@ public class PixelmonBlockTop {
 				public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState state, IProbeHitData data) {
 					Block block = state.getBlock();
 					
-					if (block.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
+					if (block.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
 						PixelmonBlockTop.getTheOneProbe.addProbeInfo(mode, probeInfo, player, world, state, data);
 					}	
 				}
@@ -62,7 +63,7 @@ public class PixelmonBlockTop {
 			probe.registerBlockDisplayOverride((mode, probeInfo, player, world, state, data) -> {
 				Block block = state.getBlock();
 				
-				if (block.getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
+				if (block.getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
 					return PixelmonBlockTop.getTheOneProbe.overrideStandardInfo(mode, probeInfo, player, world, state, data);
 				}
 				
@@ -80,31 +81,29 @@ public class PixelmonBlockTop {
 			
 			TileEntity tileEntity = world.getTileEntity(data.getPos());	
 			ItemStack itemStack = data.getPickBlock();
-			if (!itemStack.getItem().getRegistryName().getResourceDomain().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
+			if (!itemStack.getItem().getRegistryName().getNamespace().equalsIgnoreCase(ModDetails.MOD_ID_PIXELMON)) {
 				if (tileEntity != null) {
 					itemStack = new ItemStack(state.getBlock(), 1, tileEntity.getBlockMetadata());
 				} else {
 					itemStack = new ItemStack(state.getBlock());
 				}
 			}
+			
+			Block block = state.getBlock();
+			ResourceLocation registryName = block.getRegistryName();
+			if (registryName == null) {
+				return false;
+			}
 
 			if (ModConfig.top.blocks.showBlockTooltip) {
-				String translateKey_tooltip = itemStack.getUnlocalizedName() + KEY_SUFFIX_TOOLTIP;
-				
-				if (ModConfig.debug.enableDebug && ModConfig.debug.showTopBlockTranslationKey) {
-					probeInfo.text(TextUtils.translate("gui.translationkey") + " " + translateKey_tooltip);
-				}
+				String translateKey_tooltip = registryName.getPath() + KEY_SUFFIX_TOOLTIP;
 
 				String output = TextUtils.translate(translateKey_tooltip);
 	        	probeInfo.element(new WrappedTextElement(output));
 			}
 
 			if (ModConfig.top.blocks.showBlockInformation) {
-				String translateKey_information = itemStack.getUnlocalizedName() + KEY_SUFFIX_INFORMATION;
-				
-				if (ModConfig.debug.enableDebug && ModConfig.debug.showTopBlockTranslationKey) {
-					probeInfo.text(TextUtils.translate("gui.translationkey") + " " + translateKey_information);
-				}
+				String translateKey_information = registryName.getPath() + KEY_SUFFIX_INFORMATION;
 				
 				String output = TextUtils.translate(translateKey_information);
 	        	probeInfo.element(new WrappedTextElement(output));

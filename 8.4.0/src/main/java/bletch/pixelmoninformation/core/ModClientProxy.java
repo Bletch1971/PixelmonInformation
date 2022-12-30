@@ -1,12 +1,9 @@
 package bletch.pixelmoninformation.core;
 
-import java.io.File;
-
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import bletch.pixelmoninformation.jei.common.LootHelper;
 import bletch.pixelmoninformation.tooltips.PixelmonItemTooltip;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 
 @ParametersAreNonnullByDefault
@@ -15,11 +12,6 @@ public class ModClientProxy extends ModCommonProxy {
 	@Override
 	public boolean isRemote() {
 		return true;
-	}
-
-	@Override
-	public File getMinecraftDirectory() {
-		return Minecraft.getMinecraft().mcDataDir;
 	}
 	
 	@Override

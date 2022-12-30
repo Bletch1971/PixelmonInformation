@@ -40,7 +40,7 @@ public class InfuserEntry extends IForgeRegistryEntry.Impl<InfuserEntry> {
     	this.input2 = inputStack2;
     	this.output = outputStack;
         
-    	String resourcePath = ModDetails.MOD_ID + "/" + this.output.getItem().getRegistryName().getResourcePath();
+    	String resourcePath = ModDetails.MOD_ID + "/" + this.output.getItem().getRegistryName().getNamespace();
         setRegistryName(new ResourceLocation(ModDetails.MOD_ID_JEI, resourcePath));
     }
     

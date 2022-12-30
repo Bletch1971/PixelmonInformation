@@ -23,10 +23,7 @@ public class ModConfig {
 		}
 		
 	}
-	
-	@Config.LangKey("config.debug")
-	public static final Debug debug = new Debug();
-	
+		
 	@Config.LangKey("config.tooltips")
 	public static final Tooltips tooltips = new Tooltips();
 	
@@ -38,54 +35,7 @@ public class ModConfig {
 	
 	@Config.LangKey("config.top")
 	public static final TheOneProbe top = new TheOneProbe();
-	
-	@Config.LangKey("config.gui")
-	//public static final GuiSettings gui = new GuiSettings();
-	
-	public static class Debug {
 		
-		@Config.Comment("If true, debug information will be output to the console.")
-		@Config.LangKey("config.debug.enableDebug")
-		public boolean enableDebug = false;		
-	
-		@Config.Comment("If true, the item translation key will be show in the tooltip.")
-		@Config.LangKey("config.debug.showTooltipTranslationKey")
-		public boolean showTooltipTranslationKey = false;	
-		
-		@Config.Comment("If true, any blocks/items that are missing an Information record will be output to the console.")
-		@Config.LangKey("config.debug.showJeiBlocksMissingInformation")
-		@Config.RequiresMcRestart
-		public boolean showJeiMissingInformation = false;			
-		
-		@Config.Comment("If true, any blocks/items that register an Information record will be output to the console.")
-		@Config.LangKey("config.debug.showJeiBlocksRegisteredInformation")
-		@Config.RequiresMcRestart
-		public boolean showJeiRegisteredInformation = false;
-		
-		@Config.Comment("If true, any blocks/items that are missing an Information record will be registered.")
-		@Config.LangKey("config.debug.registerJeiBlocksMissingInformation")
-		@Config.RequiresMcRestart
-		public boolean registerJeiMissingInformation = false;		
-		
-		@Config.Comment("If true, the block translation key will be show in The One Probe.")
-		@Config.LangKey("config.debug.showTopBlockTranslationKey")
-		public boolean showTopBlockTranslationKey = false;	
-		
-		@Config.Comment("If true, any blocks that are registered will be output to the console.")
-		@Config.LangKey("config.debug.showWailaBlocksRegistered")
-		@Config.RequiresMcRestart
-		public boolean showWailaBlocksRegistered = false;	
-		
-		@Config.Comment("If true, the block translation key will be show in Waila.")
-		@Config.LangKey("config.debug.showWailaBlockTranslationKey")
-		public boolean showWailaBlockTranslationKey = false;	
-		
-		@Config.Comment("If true, any entities that are registered will be output to the console.")
-		@Config.LangKey("config.debug.showWailaEntitiesRegistered")
-		@Config.RequiresMcRestart
-		public boolean showWailaEntitiesRegistered = false;	
-	}
-	
 	public static class Tooltips {
 		
 		@Config.Comment("If true, will integrate with item tooltips.")
@@ -337,50 +287,6 @@ public class ModConfig {
 			@Config.Comment("If true, will show if the pokémon has been caught.")
 			@Config.LangKey("config.top.entities.showPokemonCaught")
 			public boolean showPokemonCaught = true;
-			
-		}
-		
-	}
-
-	public static class GuiSettings {
-		
-		@Config.LangKey("config.gui.pokemonInformationBook")
-		public final PokemonInformationBook pokemonInformationBook = new PokemonInformationBook();
-		
-		@Config.Comment("If true, will integrate with the GUI.")
-		@Config.LangKey("config.gui.enableGuiIntegration")
-		@Config.RequiresMcRestart
-		public boolean enableGuiIntegration = true;
-
-		public static class PokemonInformationBook {
-			
-			@Config.Comment("If true, will show the Pokémon Information Book when the player right-clicks a Pokémon with a book in hand.")
-			@Config.LangKey("config.gui.pokemonInformationBook.enablePokemonInformationBook")
-			public boolean enablePokemonInformationBook = true;
-			
-			@Config.Comment("If true, the Breeding pages will be shown in the Pokémon Information Book.")
-			@Config.LangKey("config.gui.pokemonInformationBook.showBreedingPages")
-			public boolean showBreedingPages = true;
-			
-			@Config.Comment("If true, the Drops pages will be shown in the Pokémon Information Book.")
-			@Config.LangKey("config.gui.pokemonInformationBook.showDropsPages")
-			public boolean showDropsPages = true;
-			
-			@Config.Comment("If true, the Moves pages will be shown in the Pokémon Information Book.")
-			@Config.LangKey("config.gui.pokemonInformationBook.showMovesPages")
-			public boolean showMovesPages = true;
-			
-			@Config.Comment("If true, the Spawn pages will be shown in the Pokémon Information Book.")
-			@Config.LangKey("config.gui.pokemonInformationBook.showSpawnPages")
-			public boolean showSpawnPages = true;
-			
-			@Config.Comment("If true, the Statistics pages will be shown in the Pokémon Information Book.")
-			@Config.LangKey("config.gui.pokemonInformationBook.showStatsPages")
-			public boolean showStatsPages = true;
-			
-			@Config.Comment("If true, the Types pages will be shown in the Pokémon Information Book.")
-			@Config.LangKey("config.gui.pokemonInformationBook.showTypesPages")
-			public boolean showTypesPages = true;
 			
 		}
 		

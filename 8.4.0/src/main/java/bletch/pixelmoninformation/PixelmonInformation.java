@@ -28,8 +28,6 @@ public class PixelmonInformation {
 		instance = this;
 		
 		MinecraftForge.EVENT_BUS.register(new ModConfig());
-		
-		proxy.resetDebug();
 	}
 	  
 	@Mod.EventHandler

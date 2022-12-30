@@ -27,7 +27,7 @@ public class AnvilEntry extends IForgeRegistryEntry.Impl<AnvilEntry> {
     	this.input = inputStack;
     	this.output = outputStack;
         
-    	String resourcePath = ModDetails.MOD_ID + "/" + this.output.getItem().getRegistryName().getResourcePath();
+    	String resourcePath = ModDetails.MOD_ID + "/" + this.output.getItem().getRegistryName().getNamespace();
         setRegistryName(new ResourceLocation(ModDetails.MOD_ID_JEI, resourcePath));
     }
     
