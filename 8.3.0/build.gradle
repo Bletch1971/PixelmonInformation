@@ -65,16 +65,6 @@ repositories {
     	name = "ModMaven (jei fallback)"
     	url = "https://modmaven.dev"
     }
-
-    maven { 
-        name = "TehNut's Maven (hwyla)"
-        url "https://maven.tehnut.info/" 
-    }
-    
-    maven {
-        name 'tterrag maven (the one probe)'
-        url "https://maven.tterrag.com/"
-    }
    
     maven {
         name = "CurseForge"
@@ -89,13 +79,13 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
     
 	compileOnly fg.deobf("mezz.jei:jei_1.12.2:${project.jei_version}:api")
-	runtimeOnly fg.deobf("mezz.jei:jei_1.12.2:${project.jei_version}")   
-	 
-    compileOnly fg.deobf("mcp.mobius.waila:Hwyla:${project.hwyla_version}:api")
-    runtimeOnly fg.deobf("mcp.mobius.waila:Hwyla:${project.hwyla_version}")
+	runtimeOnly fg.deobf("mezz.jei:jei_1.12.2:${project.jei_version}")
 
-	compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.12:${project.top_version}:api")
-	runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.12:${project.top_version}")
+	compileOnly fg.deobf("curse.maven:hwyla-253449:${project.hwyla_versionn_id}")
+	runtimeOnly fg.deobf("curse.maven:hwyla-253449:${project.hwyla_versionn_id}")
+
+	compileOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top_version_id}")
+	runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top_version_id}")
     
 	implementation fg.deobf("curse.maven:pixelmon-389487:${project.pixelmon_version_id}")
 }
