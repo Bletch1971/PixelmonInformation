@@ -81,8 +81,8 @@ dependencies {
 	compileOnly fg.deobf("mezz.jei:jei_1.12.2:${project.jei_version}")
 	runtimeOnly fg.deobf("mezz.jei:jei_1.12.2:${project.jei_version}")
 
-	compileOnly fg.deobf("curse.maven:hwyla-253449:${project.hwyla_versionn_id}")
-	runtimeOnly fg.deobf("curse.maven:hwyla-253449:${project.hwyla_versionn_id}")
+	compileOnly fg.deobf("curse.maven:hwyla-253449:${project.hwyla_version_id}")
+	runtimeOnly fg.deobf("curse.maven:hwyla-253449:${project.hwyla_version_id}")
 
 	compileOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top_version_id}")
 	runtimeOnly fg.deobf("curse.maven:the-one-probe-245211:${project.top_version_id}")
